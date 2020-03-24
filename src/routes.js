@@ -10,12 +10,9 @@ const AppNavigator = createStackNavigator({
     navigationOptions: {
       headerShown: false,
     },
-    Dados: {
-      screen: Dados,
-      navigationOptions: {
-        headerShown: false,
-      },
-    },
+  },
+  Dados: {
+    screen: Dados,
   },
 });
 
