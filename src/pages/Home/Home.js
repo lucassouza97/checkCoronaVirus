@@ -144,21 +144,21 @@ export default class Home extends Component {
         <ViewCard>
           <Card1>
             <CardText>{this.state.casos}</CardText>
-            <CardTitle>CASOS</CardTitle>
+            <CardTitle>Casos</CardTitle>
           </Card1>
           <Card2>
             <CardText>{this.state.confirmados}</CardText>
-            <CardTitle>CONFIRMADOS</CardTitle>
+            <CardTitle>Confirmados</CardTitle>
           </Card2>
         </ViewCard>
         <ViewCard2>
           <Card3>
             <CardText>{this.state.mortes}</CardText>
-            <CardTitle>MORTES</CardTitle>
+            <CardTitle>Mortes</CardTitle>
           </Card3>
           <Card4>
             <CardText>{this.state.recuperados}</CardText>
-            <CardTitle>CURADOS</CardTitle>
+            <CardTitle>Curados</CardTitle>
           </Card4>
         </ViewCard2>
 
@@ -166,8 +166,8 @@ export default class Home extends Component {
           <TextSelect> Selecione um Estado </TextSelect>
           <Select2
             isSelectSingle
-            style={{borderRadius: 5}}
-            colorTheme={'blue'}
+            style={{borderRadius: 1}}
+            colorTheme={'grey'}
             popupTitle="Estados"
             title="Selecione seu Estado"
             data={mockData}
