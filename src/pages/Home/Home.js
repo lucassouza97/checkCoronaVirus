@@ -38,11 +38,14 @@ const mockData = [
 
 export default class Home extends Component {
   render() {
+    // todos os estados do brasil =>  https://covid19-brazil-api.now.sh/api/report/v1
+    // lista de casos por estado => https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/rj
+    // lista de casos no brasil por data https://covid19-brazil-api.now.sh/api/report/v1/brazil/api/report/v1/brazil/20200318
     return (
       <Container>
         <Select2
           isSelectSingle
-          style={{borderRadius: 5, textAlign: 'center'}}
+          style={{borderRadius: 5}}
           colorTheme={'blue'}
           popupTitle="Estados"
           title="Selecione seu Estado"
