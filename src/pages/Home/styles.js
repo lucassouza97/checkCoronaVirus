@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import {Dimensions, Platform} from 'react-native';
+const DEVICE_HEIGHT = Dimensions.get('window').height;
 
 const calc1 = '50%';
 

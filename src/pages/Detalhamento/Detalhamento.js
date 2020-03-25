@@ -10,7 +10,6 @@ import {
   BackImage,
   StateText,
 } from './styles';
-import {createStackNavigator} from '@react-navigation/stack';
 
 export default class Detalhamento extends Component {
   constructor(props) {

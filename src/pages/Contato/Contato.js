@@ -8,9 +8,12 @@ import {
   LogoImage,
   TextCopyrigth,
 } from './styles';
-import {Text} from 'react-native';
 
 export default class Contato extends Component {
+  _onItemPressBack = item => {
+    this.props.navigation.replace('home');
+  };
+
   render() {
     return (
       <Container>
@@ -18,7 +21,7 @@ export default class Contato extends Component {
           source={require('../../../assets/BubblesContato.png')}
         />
         <BackImage source={require('../../../assets/Arrow.png')} />
-        <BackButton>
+        <BackButton onPress={this._onItemPressBack}>
           <TextButton> Voltar </TextButton>
         </BackButton>
         {/* <TextCopyrigth>Todos direitos reservados a equipe</TextCopyrigth> */}
