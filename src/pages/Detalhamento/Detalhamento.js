@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, View, Button} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {format, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
@@ -74,16 +75,11 @@ export default class Detalhamento extends Component {
 
   render() {
     return (
-      <Container>
-        <ImageBackground
-          source={require('../../../assets/BubblesContato.png')}
-        />
-        <BackImage source={require('../../../assets/Arrow.png')} />
-        <BackButton>
-          <TextButton> Voltar </TextButton>
-        </BackButton>
-        <StateText>Rio de Janeiro</StateText>
-      </Container>
+      <View>
+        <TouchableOpacity onPress={() => this._onItemPressBack()}>
+          <Text> VOLTAR </Text>
+        </TouchableOpacity>
+      </View>
     );
   }
 }

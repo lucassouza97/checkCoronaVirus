@@ -2,8 +2,6 @@ import styled from 'styled-components/native';
 import {Dimensions, Platform} from 'react-native';
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 
-const calc1 = '50%';
-
 export const Container = styled.View`
   flex: 1;
   align-items: center;
@@ -34,7 +32,7 @@ export const InputState = styled.TextInput`
   width: 204px;
   height: 40px;
   left: 117px;
-  top: 25px;
+  top: 20px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -45,12 +43,7 @@ export const InputState = styled.TextInput`
 export const ViewLogo = styled.View`
   padding-top: 8px;
   flex-direction: row;
-  justify-content: center;
-  margin: 10px auto auto auto;
-`;
-export const ViewTitle = styled.View`
-  flex: 1;
-  flex-direction: column;
+
   justify-content: center;
   margin: auto;
 `;
@@ -68,10 +61,9 @@ export const Card1 = styled.View`
 
 export const TextViewCase1 = styled.Text`
   position: absolute;
-  height: 20px;
+  /* height: 20px; */
   left: 13.87%;
   right: 50.4%;
-  /* top: calc(50% - 20px / 2 - 276px); */
   top: 15px;
   font-family: Montserrat;
   font-style: normal;
@@ -88,8 +80,8 @@ export const TextNumberCase1 = styled.Text`
   height: 34px;
   left: 13.87%;
   right: 80.8%;
+  top: 45px;
   /* top: calc(50% - 34px / 2 - 237px); */
-  top: 60px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -105,7 +97,24 @@ export const ShowMoreCase1 = styled.TouchableOpacity`
   left: 69.87%;
   right: 13.87%;
   /* top: calc(50% - 17px/2 - 275.5px); */
-  top: 18px;
+  top: 10px;
+`;
+
+export const PorcentCase1 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 23.47%;
+  right: 63.73%;
+  /* top: calc(50% - 20px/2 - 234px); */
+  top: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #fe805c;
 `;
 
 export const ShowMoreTextCase = styled.Text`
@@ -144,7 +153,6 @@ export const TextViewCase2 = styled.Text`
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-
   color: #12121f;
 `;
 
@@ -154,7 +162,7 @@ export const TextNumberCase2 = styled.Text`
   left: 13.87%;
   right: 80.8%;
   /* top: calc(50% - 34px/2 - 110px); */
-  top: 60px;
+  top: 45px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -171,6 +179,23 @@ export const ShowMoreCase2 = styled.TouchableOpacity`
   right: 13.87%;
   /* top: calc(50% - 17px/2 - 148.5px); */
   top: 18px;
+`;
+
+export const PorcentCase2 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 23.47%;
+  right: 63.73%;
+  /* top: calc(50% - 20px/2 - 234px); */
+  top: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #4eb13e;
 `;
 
 export const Card3 = styled.View`
@@ -194,6 +219,7 @@ export const TextViewCase3 = styled.Text`
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
+
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
@@ -206,7 +232,7 @@ export const TextNumberCase3 = styled.Text`
   left: 13.87%;
   right: 80.8%;
   /* top: calc(50% - 34px / 2 + 17px); */
-  top: 60px;
+  top: 45px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -224,6 +250,22 @@ export const ShowMoreCase3 = styled.TouchableOpacity`
   right: 13.87%;
   /* top: calc(50% - 17px/2 - 21.5px); */
   top: 18px;
+`;
+export const PorcentCase3 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 23.47%;
+  right: 63.73%;
+  /* top: calc(50% - 20px/2 - 234px); */
+  top: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #fe805c;
 `;
 
 export const Card4 = styled.View`
@@ -262,7 +304,7 @@ export const TextNumberCase4 = styled.Text`
   left: 13.87%;
   right: 80.8%;
   /* top: calc(50% - 34px / 2 + 144px); */
-  top: 60px;
+  top: 45px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -280,4 +322,36 @@ export const ShowMoreCase4 = styled.TouchableOpacity`
   right: 13.87%;
   /* top: calc(50% - 17px / 2 + 105.5px); */
   top: 18px;
+`;
+
+export const PorcentCase4 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 23.47%;
+  right: 63.73%;
+  /* top: calc(50% - 20px/2 - 234px); */
+  top: 50px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #fe805c;
+`;
+
+export const InfoUpdate = styled.Text`
+  position: absolute;
+  height: 17px;
+  left: 13.87%;
+  right: 58.13%;
+  top: ${DEVICE_HEIGHT - 160};
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8c8c96;
 `;
