@@ -40,6 +40,9 @@ export default class MyComponent extends React.Component {
           position: 'absolute',
           top: positionTop,
           bottom: positionBottom,
+          backdropFilter: 'blur(27.1828px)',
+          borderTopWidth: 1,
+          borderTopColor: '#95afc0',
         }}
       />
     );
