@@ -1,19 +1,47 @@
-import React from 'react';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import Home from './pages/Home/Home';
-import Dados from './pages/Dados/Dados';
+import * as React from 'react';
+import {BottomNavigation, Text} from 'react-native-paper';
+import IconHome from '../assets/icons-menu/Home/Home.png';
+import IconEarth from '../assets/icons-menu/Detalhamento/Detalhamento.png';
+import IconContato from '../assets/icons-menu/Contato/Contato.png';
+import Home from '../src/pages/Home/Home';
+import Detalhamento from '../src/pages/Detalhamento/Detalhamento';
+import Contato from '../src/pages/Contato/Contato';
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: Home,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
-  Dados: {
-    screen: Dados,
-  },
-});
+const positionTop = '89.16%';
+const positionBottom = '0.62%';
 
-export default createAppContainer(AppNavigator);
+export default class MyComponent extends React.Component {
+  state = {
+    index: 0,
+    routes: [
+      {key: 'home', icon: IconHome},
+      {key: 'detalhamento', icon: IconEarth},
+      {key: 'contato', icon: IconContato},
+    ],
+  };
+
+  _handleIndexChange = index => this.setState({index});
+
+  _renderScene = BottomNavigation.SceneMap({
+    home: Home,
+    detalhamento: Detalhamento,
+    contato: Contato,
+  });
+
+  render() {
+    return (
+      <BottomNavigation
+        navigationState={this.state}
+        onIndexChange={this._handleIndexChange}
+        renderScene={this._renderScene}
+        barStyle={{
+          backgroundColor: '#FFFFFF',
+          boxShadow: '0px -0.5px 0px rgba(0, 0, 0, 0.3)',
+          position: 'absolute',
+          top: positionTop,
+          bottom: positionBottom,
+        }}
+      />
+    );
+  }
+}
