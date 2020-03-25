@@ -7,7 +7,7 @@ import Home from '../src/pages/Home/Home';
 import Detalhamento from '../src/pages/Detalhamento/Detalhamento';
 import Contato from '../src/pages/Contato/Contato';
 
-const positionTop = '89.16%';
+const positionTop = '91.16%';
 const positionBottom = '0.62%';
 
 export default class MyComponent extends React.Component {
@@ -40,6 +40,9 @@ export default class MyComponent extends React.Component {
           position: 'absolute',
           top: positionTop,
           bottom: positionBottom,
+          backdropFilter: 'blur(27.1828px)',
+          borderTopWidth: 1,
+          borderTopColor: '#535c68',
         }}
       />
     );
