@@ -1,28 +1,29 @@
 import React, {Component} from 'react';
-import {StatusBar, Text, Image} from 'react-native';
+import {StatusBar, Text, Image, View} from 'react-native';
 import {format, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
   Container,
-  ViewTitle,
-  ViewCard,
-  CardText,
+  LogoTop,
+  SearchIcon,
+  InputState,
   Card1,
   Card2,
   Card3,
   Card4,
-  CardTitle,
-  ButtonText,
-  ViewSelected,
-  ViewButtonSearch,
-  ViewCard2,
-  TextTitle,
-  TextSelect,
-  ImageLogo,
-  ViewLogo,
-  TextSubTitle,
-  ButtonSearch,
-  DateText,
+  TextViewCase1,
+  TextViewCase2,
+  TextViewCase3,
+  TextViewCase4,
+  TextNumberCase1,
+  TextNumberCase2,
+  TextNumberCase3,
+  TextNumberCase4,
+  ShowMoreCase1,
+  ShowMoreCase2,
+  ShowMoreCase3,
+  ShowMoreCase4,
+  ShowMoreTextCase,
 } from './styles';
 
 const mockData = [
@@ -120,7 +121,43 @@ export default class Home extends Component {
   render() {
     return (
       <Container>
-        <Text> BONDE DO BRUXAO </Text>
+        <StatusBar hidden />
+        <LogoTop source={require('../../../assets/Icon.png')} />
+        <SearchIcon source={require('../../../assets/Searchicon.png')} />
+        <InputState
+          placeholder="Veja pela sua localização"
+          placeholderTextColor="black"
+          underlineColorAndroid="transparent"
+        />
+
+        <Card1>
+          <TextViewCase1>Casos suspeitos</TextViewCase1>
+          <TextNumberCase1>4</TextNumberCase1>
+          <ShowMoreCase1>
+            <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+          </ShowMoreCase1>
+        </Card1>
+        <Card2>
+          <TextViewCase2>Confirmados</TextViewCase2>
+          <TextNumberCase2>4</TextNumberCase2>
+          <ShowMoreCase2>
+            <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+          </ShowMoreCase2>
+        </Card2>
+        <Card3>
+          <TextViewCase3>Mortes</TextViewCase3>
+          <TextNumberCase3>4</TextNumberCase3>
+          <ShowMoreCase3>
+            <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+          </ShowMoreCase3>
+        </Card3>
+        <Card4>
+          <TextViewCase4>Curados</TextViewCase4>
+          <TextNumberCase4>4</TextNumberCase4>
+          <ShowMoreCase4>
+            <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+          </ShowMoreCase4>
+        </Card4>
       </Container>
     );
   }

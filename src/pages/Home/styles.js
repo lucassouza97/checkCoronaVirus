@@ -1,14 +1,46 @@
 import styled from 'styled-components/native';
 import {Dimensions, Platform} from 'react-native';
 
-export const Container = styled.KeyboardAvoidingView.attrs({
-  behavior: 'padding',
-})`
+const calc1 = '50%';
+
+export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
   padding: 0 10px;
 `;
+
+export const LogoTop = styled.Image`
+  position: absolute;
+  width: 35.41px;
+  height: 34.66px;
+  left: 20px;
+  top: 24px;
+`;
+
+export const SearchIcon = styled.Image`
+  position: absolute;
+  left: 88.8%;
+  right: 5.33%;
+  top: 3.82%;
+  bottom: 93.47%;
+`;
+
+export const InputState = styled.TextInput`
+  position: absolute;
+  font-size: 15px;
+  text-align: right;
+  width: 204px;
+  height: 40px;
+  left: 117px;
+  top: 25px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 40px;
+`;
+
 export const ViewLogo = styled.View`
   padding-top: 8px;
   flex-direction: row;
@@ -21,126 +53,230 @@ export const ViewTitle = styled.View`
   justify-content: center;
   margin: auto;
 `;
-export const ViewCard = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
-export const ViewCard2 = styled.View`
-  flex: 1;
-  flex-direction: row;
-`;
+
 export const Card1 = styled.View`
-  justify-content: center;
-  width: 40%;
-  background-color: #ff9800;
-  border-radius: 8px;
-  margin-right: 5px;
+  position: absolute;
+  left: 5.33%;
+  right: 5.33%;
+  top: 12.32%;
+  bottom: 74.51%;
+  background: #ffffff;
+  box-shadow: 30px 35px 22px rgba(70, 67, 211, 0.13);
+  border-radius: 24px;
+`;
+
+export const TextViewCase1 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 13.87%;
+  right: 50.4%;
+  /* top: calc(50% - 20px / 2 - 276px); */
+  top: 15px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const TextNumberCase1 = styled.Text`
+  position: absolute;
+  height: 34px;
+  left: 13.87%;
+  right: 80.8%;
+  /* top: calc(50% - 34px / 2 - 237px); */
+  top: 60px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const ShowMoreCase1 = styled.TouchableOpacity`
+  position: absolute;
+  height: 17px;
+  left: 69.87%;
+  right: 13.87%;
+  /* top: calc(50% - 17px/2 - 275.5px); */
+  top: 18px;
+`;
+
+export const ShowMoreTextCase = styled.Text`
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  text-decoration-line: underline;
+  color: #4643d3;
 `;
 
 export const Card2 = styled.View`
-  width: 40%;
-  background-color: #3f51b5;
-  justify-content: center;
-  border-radius: 8px;
-  margin-left: 5px;
+  position: absolute;
+  left: 5.33%;
+  right: 5.33%;
+  top: 27.96%;
+  bottom: 58.87%;
+  background: #ffffff;
+  border-radius: 24px;
+`;
+
+export const TextViewCase2 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 13.87%;
+  right: 56.8%;
+  /* top: calc(50% - 20px / 2 - 149px); */
+  top: 60px;
+  top: 15px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+
+  color: #12121f;
+`;
+
+export const TextNumberCase2 = styled.Text`
+  position: absolute;
+  height: 34px;
+  left: 13.87%;
+  right: 80.8%;
+  /* top: calc(50% - 34px/2 - 110px); */
+  top: 60px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const ShowMoreCase2 = styled.TouchableOpacity`
+  position: absolute;
+  height: 17px;
+  left: 69.87%;
+  right: 13.87%;
+  /* top: calc(50% - 17px/2 - 148.5px); */
+  top: 18px;
 `;
 
 export const Card3 = styled.View`
-  width: 40%;
-  background-color: #f44336;
-  justify-content: center;
-  border-radius: 8px;
-  margin-right: 5px;
-  margin-top: 7px;
+  position: absolute;
+  left: 5.33%;
+  right: 5.33%;
+  top: 43.6%;
+  bottom: 43.23%;
+  background: #ffffff;
+  border-radius: 24px;
+`;
+
+export const TextViewCase3 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 13.87%;
+  right: 70.4%;
+  /* top: calc(50% - 20px / 2 - 22px); */
+  top: 15px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const TextNumberCase3 = styled.Text`
+  position: absolute;
+  height: 34px;
+  left: 13.87%;
+  right: 80.8%;
+  /* top: calc(50% - 34px / 2 + 17px); */
+  top: 60px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: 0.25px;
+
+  color: #12121f;
+`;
+
+export const ShowMoreCase3 = styled.TouchableOpacity`
+  position: absolute;
+  height: 17px;
+  left: 69.87%;
+  right: 13.87%;
+  /* top: calc(50% - 17px/2 - 21.5px); */
+  top: 18px;
 `;
 
 export const Card4 = styled.View`
-  width: 40%;
-  background-color: #4caf50;
-  justify-content: center;
-  border-radius: 8px;
-  margin-left: 5px;
-  margin-top: 7px;
+  position: absolute;
+  left: 5.33%;
+  right: 5.33%;
+  top: 59.24%;
+  bottom: 27.59%;
+
+  background: #ffffff;
+  /* box-shadow: 30px 35px 22px rgba(70, 67, 211, 0.13),
+    10px 15px 15px rgba(70, 67, 211, 0.06), 0px 0px 5px rgba(70, 67, 211, 0.15); */
+  border-radius: 24px;
 `;
 
-export const CardText = styled.Text`
-  font-size: 28px;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  font-family: Roboto-Bold;
-`;
-
-export const ViewSelected = styled.View`
-  margin: auto 30px;
-`;
-export const ViewButtonSearch = styled.View`
-  flex: 1;
-  margin-top: 10px;
-`;
-
-export const TextTitle = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  color: red;
-  text-align: center;
-  font-family: Roboto-Bold;
-`;
-
-export const CardTitle = styled.Text`
+export const TextViewCase4 = styled.Text`
+  position: absolute;
+  height: 20px;
+  left: 13.87%;
+  right: 70.4%;
+  /* top: calc(50% - 20px / 2 - 22px); */
+  top: 15px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
   font-size: 16px;
-  color: white;
-  text-align: center;
-  font-family: Roboto-Bold;
-  margin: -10px 7px -10px 7px;
-  width: auto;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #12121f;
 `;
 
-export const TextSelect = styled.Text`
-  font-size: 14px;
-  text-align: center;
-  margin: 10px 5px;
-  font-family: Roboto-Bold;
+export const TextNumberCase4 = styled.Text`
+  position: absolute;
+  height: 34px;
+  left: 13.87%;
+  right: 80.8%;
+  /* top: calc(50% - 34px / 2 + 144px); */
+  top: 60px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: 0.25px;
+
+  color: #12121f;
 `;
 
-export const TextSubTitle = styled.Text`
-  font-size: 17px;
-  text-align: center;
-  margin: 1px 5px;
-  font-family: Roboto-Bold;
-`;
-
-export const ImageLogo = styled.Image`
-  width: 140px;
-  height: 140px;
-`;
-
-export const ButtonSearch = styled.TouchableOpacity`
-  background-color: #d3d3d3;
-  border-radius: 20px;
-  align-self: center;
-  margin-top: ${Platform.OS === 'android'
-    ? Dimensions.get('window').height / 50
-    : Dimensions.get('window').height / 30}px;
-  padding: 5px;
-`;
-/* background-color: #d3d3d3;
-  border-radius: 20px;
-  width: auto;
-  /* border: 1px solid #2c3e50; */
-/* margin: 12px 32px 12px 35px;  */
-
-export const ButtonText = styled.Text`
-  font-size: 14px;
-  color: #3f3f3f;
-  font-family: Roboto-Bold;
-  font-weight: bold;
-  margin: 8px 20px 8px 20px;
-`;
-
-export const DateText = styled.Text`
-  font-size: 13px;
-  color: #3f3f3f;
-  font-family: Roboto-Bold;
-  font-style: italic;
+export const ShowMoreCase4 = styled.TouchableOpacity`
+  position: absolute;
+  height: 17px;
+  left: 69.87%;
+  right: 13.87%;
+  /* top: calc(50% - 17px / 2 + 105.5px); */
+  top: 18px;
 `;
