@@ -196,9 +196,9 @@ export default class Home extends Component {
                 style={{
                   inputAndroid: {
                     backgroundColor: 'transparent',
-                    fontSize: 17,
+                    fontSize: 18,
                     color: 'black',
-                    marginTop: 25,
+                    marginTop: 28,
                     marginLeft: 150,
                     width: 204,
                     height: 40,
@@ -209,7 +209,7 @@ export default class Home extends Component {
                   },
                   placeholder: {
                     color: 'black',
-                    fontSize: 17,
+                    fontSize: 18,
                     fontWeight: 'bold',
                   },
                 }}
@@ -291,9 +291,7 @@ export default class Home extends Component {
               </Card4>
             </MainCard>
             <ViewInfo>
-              <InfoUpdate>
-                Desenvolvedores: Daniel Matheus & Lucas Souza
-              </InfoUpdate>
+              <InfoUpdate>Copyright: Check Corona Virus</InfoUpdate>
             </ViewInfo>
           </Container>
         </DismissKeyboard>
@@ -315,7 +313,7 @@ export default class Home extends Component {
                 style={{
                   inputAndroid: {
                     backgroundColor: 'transparent',
-                    fontSize: 17,
+                    fontSize: 18,
                     color: 'black',
                     marginTop: 25,
                     marginLeft: 150,
@@ -328,8 +326,9 @@ export default class Home extends Component {
                   },
                   placeholder: {
                     color: 'black',
-                    fontSize: 17,
+                    fontSize: 18,
                     fontWeight: 'bold',
+                    marginLeft: 30,
                   },
                 }}
                 value={this.state.favSport3}
