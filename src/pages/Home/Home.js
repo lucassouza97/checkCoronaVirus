@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
-import {StatusBar, Text, Image, View} from 'react-native';
+import {
+  StatusBar,
+  Text,
+  Image,
+  View,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Alert,
+} from 'react-native';
 import {format, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
@@ -7,6 +15,7 @@ import {
   InputState,
   SearchIcon,
   LogoTop,
+  TouchableSearch,
   Card1,
   Card2,
   Card3,
@@ -41,6 +50,12 @@ import {
   ImageUp4,
   ImageDown4,
 } from './styles';
+
+const DismissKeyboard = ({children}) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 const mockData = [
   {id: 1, name: 'Acre'},
@@ -87,8 +102,11 @@ export default class Home extends Component {
       suspeitas: '',
       qtdTestesNeg: '',
       updated_at: '',
+      inputValue: '',
     };
     this.getCasosPais = this.getCasosPais.bind(this);
+    this.getCasosEstado = this.getCasosEstado.bind(this);
+    this.filterText = this.filterText.bind(this);
   }
   //Primeira Tela = 1: Listar estado com maior numero de casos
   // todos os estados do brasil =>  https://covid19-brazil-api.now.sh/api/report/v1
@@ -98,6 +116,47 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.getCasosPais();
+  }
+  filterText(text) {
+    this.setState({
+      inputValue: text.replace(/([^\d\s/-])/g, ''),
+    });
+  }
+
+  getCasosEstado() {
+    // eslint-disable-next-line eqeqeq
+    console.log(this.state.inputValue);
+    this.setState({
+      casos: '',
+      confirmados: '',
+      mortes: '',
+      recuperados: '',
+      updated_at: '',
+    });
+    fetch(
+      `https://covid19-brazil-api.now.sh/api/report/v1/${
+        this.state.inputValue
+      }`,
+    )
+      .then(r => r.json())
+      .then(json => {
+        let s = this.state;
+        s.casos = json.data.cases;
+        s.confirmados = json.data.confirmed;
+        s.mortes = json.data.deaths;
+        s.recuperados = json.data.recovered;
+        s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
+          locale: pt,
+        });
+        this.setState(s);
+        console.log(json);
+      })
+      .catch(error => {
+        this.setState({
+          error: true,
+          loading: false,
+        });
+      });
   }
 
   getCasosPais() {
@@ -116,15 +175,11 @@ export default class Home extends Component {
         s.confirmados = json.data.confirmed;
         s.mortes = json.data.deaths;
         s.recuperados = json.data.recovered;
-        s.updated_at = format(
-          parseISO(json.data.updated_at),
-          "'dia' dd 'de' MMMM', ás' H:mm'h'",
-          {
-            locale: pt,
-          },
-        );
+        s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
+          locale: pt,
+        });
         this.setState(s);
-        console.log(json);
+        //console.log(json);
       })
       .catch(error => {
         this.setState({
@@ -136,103 +191,109 @@ export default class Home extends Component {
 
   render() {
     return (
-      <Container>
-        <StatusBar hidden />
-        <ViewHeader>
-          <LogoTop source={require('../../../assets/Icon.png')} />
-          <InputState
-            placeholder="Verifique por estado"
-            placeholderTextColor="black"
-            underlineColorAndroid="transparent"
-          />
-          <SearchIcon source={require('../../../assets/Searchicon.png')} />
-        </ViewHeader>
-        <MainCard>
-          <Card1
-            style={{
-              shadowColor: '#4643D3',
-              shadowOffset: {
-                width: 0,
-                height: 12,
-              },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.0,
+      <DismissKeyboard>
+        <Container>
+          <StatusBar hidden />
+          <ViewHeader>
+            <LogoTop source={require('../../../assets/Icon.png')} />
+            <InputState
+              placeholder="Verifique por estado"
+              placeholderTextColor="black"
+              underlineColorAndroid="transparent"
+              value={this.state.inputValue}
+              onChangeText={this.filterText}
+            />
+            <TouchableSearch onPress={this.getCasosEstado}>
+              <SearchIcon source={require('../../../assets/Searchicon.png')} />
+            </TouchableSearch>
+          </ViewHeader>
+          <MainCard>
+            <Card1
+              style={{
+                shadowColor: '#4643D3',
+                shadowOffset: {
+                  width: 0,
+                  height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.0,
 
-              elevation: 24,
-            }}>
-            <TextViewCase1>Casos suspeitos</TextViewCase1>
-            <TextNumberCase1>4</TextNumberCase1>
-            <PorcentCase1>+8.5%</PorcentCase1>
-            <ImageUp1 source={require('../../../assets/imageUp.png')} />
-            <ShowMoreCase1>
-              <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-            </ShowMoreCase1>
-          </Card1>
-          <Card2
-            style={{
-              shadowColor: '#4643D3',
-              shadowOffset: {
-                width: 0,
-                height: 12,
-              },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.0,
+                elevation: 24,
+              }}>
+              <TextViewCase1>Casos suspeitos</TextViewCase1>
+              <TextNumberCase1>{this.state.casos}</TextNumberCase1>
+              <PorcentCase1>+8.5%</PorcentCase1>
+              <ImageUp1 source={require('../../../assets/imageUp.png')} />
+              <ShowMoreCase1>
+                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+              </ShowMoreCase1>
+            </Card1>
+            <Card2
+              style={{
+                shadowColor: '#4643D3',
+                shadowOffset: {
+                  width: 0,
+                  height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.0,
 
-              elevation: 24,
-            }}>
-            <TextViewCase2>Confirmados</TextViewCase2>
-            <TextNumberCase2>4</TextNumberCase2>
-            <PorcentCase2>+8.5%</PorcentCase2>
-            <ImageUp2 source={require('../../../assets/imageUp.png')} />
-            <ShowMoreCase2>
-              <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-            </ShowMoreCase2>
-          </Card2>
-          <Card3
-            style={{
-              shadowColor: '#4643D3',
-              shadowOffset: {
-                width: 0,
-                height: 12,
-              },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.0,
+                elevation: 24,
+              }}>
+              <TextViewCase2>Confirmados</TextViewCase2>
+              <TextNumberCase2>{this.state.confirmados}</TextNumberCase2>
+              <PorcentCase2>+8.5%</PorcentCase2>
+              <ImageDown2 source={require('../../../assets/imageDown.png')} />
+              <ShowMoreCase2>
+                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+              </ShowMoreCase2>
+            </Card2>
+            <Card3
+              style={{
+                shadowColor: '#4643D3',
+                shadowOffset: {
+                  width: 0,
+                  height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.0,
 
-              elevation: 24,
-            }}>
-            <TextViewCase3>Mortes</TextViewCase3>
-            <TextNumberCase3>4</TextNumberCase3>
-            <PorcentCase3>+8.5%</PorcentCase3>
-            <ImageUp3 source={require('../../../assets/imageUp.png')} />
-            <ShowMoreCase3>
-              <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-            </ShowMoreCase3>
-          </Card3>
-          <Card4
-            style={{
-              shadowColor: '#4643D3',
-              shadowOffset: {
-                width: 0,
-                height: 6,
-              },
-              shadowOpacity: 0.58,
-              shadowRadius: 16.0,
+                elevation: 24,
+              }}>
+              <TextViewCase3>Mortes</TextViewCase3>
+              <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
+              <PorcentCase3>+8.5%</PorcentCase3>
+              <ImageUp3 source={require('../../../assets/imageUp.png')} />
+              <ShowMoreCase3>
+                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+              </ShowMoreCase3>
+            </Card3>
+            <Card4
+              style={{
+                shadowColor: '#4643D3',
+                shadowOffset: {
+                  width: 0,
+                  height: 12,
+                },
+                shadowOpacity: 0.58,
+                shadowRadius: 16.0,
 
-              elevation: 24,
-            }}>
-            <TextViewCase4>Curados</TextViewCase4>
-            <TextNumberCase4>4</TextNumberCase4>
-            <PorcentCase4>+8.5%</PorcentCase4>
-            <ImageDown4 source={require('../../../assets/imageDown.png')} />
-            <ShowMoreCase4>
-              <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-            </ShowMoreCase4>
-          </Card4>
-        </MainCard>
-        <ViewInfo>
-          <InfoUpdate>Atualizado em: 22/03/2020</InfoUpdate>
-        </ViewInfo>
-      </Container>
+                elevation: 24,
+              }}>
+              <TextViewCase4>Curados</TextViewCase4>
+              <TextNumberCase4>{this.state.recuperados}</TextNumberCase4>
+              <PorcentCase4>+8.5%</PorcentCase4>
+              <ImageDown4 source={require('../../../assets/imageDown.png')} />
+              <ShowMoreCase4>
+                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+              </ShowMoreCase4>
+            </Card4>
+          </MainCard>
+          <ViewInfo>
+            <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
+          </ViewInfo>
+        </Container>
+      </DismissKeyboard>
     );
   }
 }
