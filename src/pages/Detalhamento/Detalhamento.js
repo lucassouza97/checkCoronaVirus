@@ -75,11 +75,17 @@ export default class Detalhamento extends Component {
 
   render() {
     return (
-      <View>
-        <TouchableOpacity onPress={() => this._onItemPressBack()}>
-          <Text> VOLTAR </Text>
-        </TouchableOpacity>
-      </View>
+      <Container>
+        <ImageBackground
+          source={require('../../../assets/BubblesContato.png')}
+        />
+        <BackImage source={require('../../../assets/Arrow.png')} />
+        <BackButton onPress={this._onItemPressBack}>
+          <TextButton> Voltar </TextButton>
+        </BackButton>
+        <StateText>Rio de Janeiro</StateText>
+        <Text>Ola daniel</Text>
+      </Container>
     );
   }
 }
