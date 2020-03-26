@@ -64,6 +64,14 @@ export const LogoTop = styled.Image`
   top: 24px;
 `;
 
+export const ImageLoading = styled.Image`
+  position: absolute;
+  width: 40.41px;
+  height: 34.66px;
+  left: 42%;
+  top: 30%;
+`;
+
 export const SearchIcon = styled.Image`
   position: absolute;
   left: 88.8%;
@@ -97,7 +105,7 @@ export const ViewLogo = styled.View`
 export const TextViewLoading = styled.Text`
   /* height: 20px; */
   text-align: center;
-  top: 15px;
+  top: 95px;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;

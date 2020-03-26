@@ -5,6 +5,7 @@ import {
   Keyboard,
   StyleSheet,
   View,
+  Image,
 } from 'react-native';
 import {format, parseISO} from 'date-fns';
 import RNPickerSelect from 'react-native-picker-select';
@@ -34,6 +35,7 @@ import {
   PorcentCaseDown,
   TextNumberCase,
   TextViewLoading,
+  ImageLoading,
 } from './styles';
 
 const DismissKeyboard = ({children}) => (
@@ -106,9 +108,7 @@ export default class Home extends Component {
   getCasosEstado(value) {
     if (value === 'BR') {
       this.getCasosPais();
-    }
-
-    if (value === null) {
+    } else if (value === null) {
       this.setState({action: true});
     } else {
       this.setState({
@@ -234,6 +234,9 @@ export default class Home extends Component {
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+                <ImageLoading
+                  source={require('../../../assets/gif_loading.gif')}
+                />
               </Card1>
               <Card2
                 style={{
@@ -248,6 +251,9 @@ export default class Home extends Component {
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+                <ImageLoading
+                  source={require('../../../assets/gif_loading.gif')}
+                />
               </Card2>
               <Card3
                 style={{
@@ -262,6 +268,9 @@ export default class Home extends Component {
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+                <ImageLoading
+                  source={require('../../../assets/gif_loading.gif')}
+                />
               </Card3>
               <Card4
                 style={{
@@ -276,6 +285,9 @@ export default class Home extends Component {
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+                <ImageLoading
+                  source={require('../../../assets/gif_loading.gif')}
+                />
               </Card4>
             </MainCard>
             <ViewInfo>
