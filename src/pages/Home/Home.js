@@ -124,7 +124,6 @@ export default class Home extends Component {
   }
 
   getCasosEstado() {
-    // eslint-disable-next-line eqeqeq
     console.log(this.state.inputValue);
     this.setState({
       casos: '',
@@ -133,19 +132,19 @@ export default class Home extends Component {
       recuperados: '',
       updated_at: '',
     });
-    fetch(
-      `https://covid19-brazil-api.now.sh/api/report/v1/${
-        this.state.inputValue
-      }`,
-    )
+    const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${
+      this.state.inputValue
+    }`;
+    console.log(url);
+    fetch(url)
       .then(r => r.json())
       .then(json => {
         let s = this.state;
-        s.casos = json.data.cases;
-        s.confirmados = json.data.confirmed;
-        s.mortes = json.data.deaths;
-        s.recuperados = json.data.recovered;
-        s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
+        s.casos = json.cases;
+        s.confirmados = json.confirmed;
+        s.mortes = json.deaths;
+        s.recuperados = json.recovered;
+        s.updated_at = format(parseISO(json.updated_at), "dd 'de' MMMM'", {
           locale: pt,
         });
         this.setState(s);
@@ -200,8 +199,8 @@ export default class Home extends Component {
               placeholder="Verifique por estado"
               placeholderTextColor="black"
               underlineColorAndroid="transparent"
+              onChangeText={text => this.setState({inputValue: text})}
               value={this.state.inputValue}
-              onChangeText={this.filterText}
             />
             <TouchableSearch onPress={this.getCasosEstado}>
               <SearchIcon source={require('../../../assets/Searchicon.png')} />
