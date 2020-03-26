@@ -18,6 +18,13 @@ export const ViewHeader = styled.View`
 export const ViewInfo = styled.View`
   flex: 1;
 `;
+
+export const ViewText = styled.View`
+  top: 12%;
+  width: 70%;
+  height: 50%;
+  flex-direction: row;
+`;
 export const MainCard = styled.View`
   flex: 5;
   flex-direction: column;
@@ -56,14 +63,13 @@ export const LogoTop = styled.Image`
   left: 20px;
   top: 24px;
 `;
-export const TouchableSearch = styled.TouchableOpacity`
+
+export const SearchIcon = styled.Image`
   position: absolute;
   left: 88.8%;
   right: 5.33%;
   top: 31%;
 `;
-
-export const SearchIcon = styled.Image``;
 
 export const InputState = styled.TextInput`
   position: absolute;
@@ -88,6 +94,21 @@ export const ViewLogo = styled.View`
   margin: auto;
 `;
 
+export const TextViewLoading = styled.Text`
+  /* height: 20px; */
+  text-align: center;
+  top: 15px;
+  /* top: calc(50% - 34px / 2 - 237px); */
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: grey;
+`;
+
 export const TextViewCase1 = styled.Text`
   position: absolute;
   /* height: 20px; */
@@ -105,13 +126,12 @@ export const TextViewCase1 = styled.Text`
   color: #12121f;
 `;
 
-export const TextNumberCase1 = styled.Text`
-  position: absolute;
+export const TextNumberCase = styled.Text`
   height: 34px;
-  width: 25%;
-  left: 13.87%;
-  right: 80.8%;
-  top: 45px;
+  width: auto;
+  left: 68.87%;
+  /* mudei e removi o absolute */
+  top: 15px;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
@@ -131,13 +151,12 @@ export const ShowMoreCase1 = styled.TouchableOpacity`
   top: 18px;
 `;
 
-export const PorcentCase1 = styled.Text`
-  position: absolute;
+export const PorcentCaseUp = styled.Text`
   height: 20px;
-  left: 40.47%;
+  left: 80.47%;
   right: 23.73%;
   /* top: calc(50% - 20px/2 - 234px); */
-  top: 50px;
+  top: 20px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -148,18 +167,32 @@ export const PorcentCase1 = styled.Text`
   color: #fe805c;
 `;
 
+export const PorcentCaseDown = styled.Text`
+  height: 20px;
+  left: 80.47%;
+  right: 23.73%;
+  /* top: calc(50% - 20px/2 - 234px); */
+  top: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #4eb13e;
+`;
+
 export const ImageUp1 = styled.Image`
-  position: absolute;
   right: 59.82%;
-  left: 56%;
-  top: 52%;
+  left: 85%;
+  top: 10%;
   bottom: 76.64%;
 `;
 export const ImageDown1 = styled.Image`
-  position: absolute;
   right: 59.82%;
-  left: 34.98%;
-  top: 52%;
+  left: 85%;
+  top: 10%;
   bottom: 76.64%;
 `;
 export const ShowMoreTextCase = styled.Text`
@@ -192,13 +225,12 @@ export const TextViewCase2 = styled.Text`
 `;
 
 export const TextNumberCase2 = styled.Text`
-  position: absolute;
   height: 34px;
-  width: 25%;
-  left: 13.87%;
-  right: 80.8%;
+  width: auto;
+  left: 55.87%;
+  /* mudei e removi o absolute */
+  top: 10px;
   /* top: calc(50% - 34px/2 - 110px); */
-  top: 45px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -215,37 +247,6 @@ export const ShowMoreCase2 = styled.TouchableOpacity`
   right: 6.87%;
   /* top: calc(50% - 17px/2 - 148.5px); */
   top: 18px;
-`;
-
-export const PorcentCase2 = styled.Text`
-  position: absolute;
-  height: 20px;
-  left: 40.47%;
-  right: 23.73%;
-  /* top: calc(50% - 20px/2 - 234px); */
-  top: 50px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  /* identical to box height */
-  letter-spacing: 0.25px;
-  color: #4eb13e;
-`;
-export const ImageUp2 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 56%;
-  top: 52%;
-  bottom: 76.64%;
-`;
-export const ImageDown2 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 56%;
-  top: 52%;
-  bottom: 76.64%;
 `;
 
 export const TextViewCase3 = styled.Text`
@@ -268,12 +269,12 @@ export const TextViewCase3 = styled.Text`
 `;
 
 export const TextNumberCase3 = styled.Text`
-  position: absolute;
   height: 34px;
-  left: 13.87%;
+  left: 55.87%;
   right: 80.8%;
+  width: auto;
   /* top: calc(50% - 34px / 2 + 17px); */
-  top: 45px;
+  top: 10px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -290,36 +291,6 @@ export const ShowMoreCase3 = styled.TouchableOpacity`
   right: 6.87%;
   /* top: calc(50% - 17px/2 - 21.5px); */
   top: 18px;
-`;
-export const PorcentCase3 = styled.Text`
-  position: absolute;
-  height: 20px;
-  left: 23.47%;
-  right: 63.73%;
-  /* top: calc(50% - 20px/2 - 234px); */
-  top: 50px;
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  /* identical to box height */
-  letter-spacing: 0.25px;
-  color: #fe805c;
-`;
-export const ImageUp3 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 34.98%;
-  top: 52%;
-  bottom: 76.64%;
-`;
-export const ImageDown3 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 34.98%;
-  top: 52%;
-  bottom: 76.64%;
 `;
 
 export const TextViewCase4 = styled.Text`
@@ -341,12 +312,12 @@ export const TextViewCase4 = styled.Text`
 `;
 
 export const TextNumberCase4 = styled.Text`
-  position: absolute;
   height: 34px;
-  left: 13.87%;
+  left: 55.87%;
   right: 80.8%;
-  /* top: calc(50% - 34px / 2 + 144px); */
-  top: 45px;
+  width: auto;
+  /* top: calc(50% - 34px / 2 + 17px); */
+  top: 10px;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
@@ -363,31 +334,6 @@ export const ShowMoreCase4 = styled.TouchableOpacity`
   left: 67.87%;
   right: 6.87%;
   top: 18px;
-`;
-
-export const PorcentCase4 = styled.Text`
-  position: absolute;
-  height: 20px;
-  left: 23.47%;
-  right: 63.73%;
-  /* top: calc(50% - 20px/2 - 234px); */
-  top: 50px;
-  letter-spacing: 0.25px;
-  color: #4eb13e;
-`;
-export const ImageUp4 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 34.98%;
-  top: 52%;
-  bottom: 76.64%;
-`;
-export const ImageDown4 = styled.Image`
-  position: absolute;
-  right: 59.82%;
-  left: 36.98%;
-  top: 52%;
-  bottom: 76.64%;
 `;
 
 export const InfoUpdate = styled.Text`

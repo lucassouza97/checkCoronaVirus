@@ -1,21 +1,18 @@
 import React, {Component} from 'react';
 import {
   StatusBar,
-  Text,
-  Image,
-  View,
   TouchableWithoutFeedback,
   Keyboard,
-  Alert,
+  StyleSheet,
+  View,
 } from 'react-native';
 import {format, parseISO} from 'date-fns';
+import RNPickerSelect from 'react-native-picker-select';
 import pt from 'date-fns/locale/pt';
 import {
   Container,
-  InputState,
   SearchIcon,
   LogoTop,
-  TouchableSearch,
   Card1,
   Card2,
   Card3,
@@ -24,31 +21,19 @@ import {
   TextViewCase2,
   TextViewCase3,
   TextViewCase4,
-  TextNumberCase1,
-  TextNumberCase2,
-  TextNumberCase3,
-  TextNumberCase4,
   ShowMoreCase1,
-  ShowMoreCase2,
-  ShowMoreCase3,
-  ShowMoreCase4,
   ShowMoreTextCase,
-  PorcentCase1,
-  PorcentCase2,
-  PorcentCase3,
-  PorcentCase4,
   InfoUpdate,
   MainCard,
   ViewHeader,
   ViewInfo,
   ImageUp1,
   ImageDown1,
-  ImageUp2,
-  ImageDown2,
-  ImageUp3,
-  ImageDown3,
-  ImageUp4,
-  ImageDown4,
+  ViewText,
+  PorcentCaseUp,
+  PorcentCaseDown,
+  TextNumberCase,
+  TextViewLoading,
 } from './styles';
 
 const DismissKeyboard = ({children}) => (
@@ -56,36 +41,6 @@ const DismissKeyboard = ({children}) => (
     {children}
   </TouchableWithoutFeedback>
 );
-
-const mockData = [
-  {id: 1, name: 'Acre'},
-  {id: 2, name: 'Alagoas'},
-  {id: 3, name: 'Amapá'},
-  {id: 4, name: 'Amazonas'},
-  {id: 5, name: 'Bahia'},
-  {id: 6, name: 'Ceará'},
-  {id: 7, name: 'Distrito Federal'},
-  {id: 8, name: 'Espírito Santo'},
-  {id: 9, name: 'Goiás'},
-  {id: 10, name: 'Maranhão'},
-  {id: 11, name: 'Mato Grosso'},
-  {id: 12, name: 'Mato Grosso do Sul'},
-  {id: 13, name: 'Minas Gerais'},
-  {id: 14, name: 'Pará'},
-  {id: 15, name: 'Paraíba'},
-  {id: 16, name: 'Paraná'},
-  {id: 17, name: 'Pernambuco'},
-  {id: 18, name: 'Piauí'},
-  {id: 19, name: 'Rio de Janeiro'},
-  {id: 20, name: 'Rio Grande do Norte'},
-  {id: 21, name: 'Rio Grande do Sul'},
-  {id: 22, name: 'Rondônia'},
-  {id: 23, name: 'Roraima'},
-  {id: 24, name: 'Santa Catarina'},
-  {id: 25, name: 'São Paulo'},
-  {id: 26, name: 'Sergipe'},
-  {id: 27, name: 'Tocantins'},
-];
 
 export default class Home extends Component {
   constructor(props) {
@@ -103,60 +58,92 @@ export default class Home extends Component {
       qtdTestesNeg: '',
       updated_at: '',
       inputValue: '',
+      action: true,
+
+      items: [
+        {value: 'BR', label: 'Brasil'},
+        {value: 'AC', label: 'Acre'},
+        {value: 'AL', label: 'Alagoas'},
+        {value: 'AP', label: 'Amapá'},
+        {value: 'AM', label: 'Amazonas'},
+        {value: 'BA', label: 'Bahia'},
+        {value: 'CE', label: 'Ceará'},
+        {value: 'DF', label: 'Distrito Federal'},
+        {value: 'ES', label: 'Espírito Santo'},
+        {value: 'GO', label: 'Goiás'},
+        {value: 'MA', label: 'Maranhão'},
+        {value: 'MT', label: 'Mato Grosso'},
+        {value: 'MS', label: 'Mato Grosso do Sul'},
+        {value: 'MG', label: 'Minas Gerais'},
+        {value: 'PA', label: 'Pará'},
+        {value: 'PB', label: 'Paraíba'},
+        {value: 'PR', label: 'Paraná'},
+        {value: 'PE', label: 'Pernambuco'},
+        {value: 'PI', label: 'Piauí'},
+        {value: 'RJ', label: 'Rio de Janeiro'},
+        {value: 'RN', label: 'Rio Grande do Norte'},
+        {value: 'RS', label: 'Rio Grande do Sul'},
+        {value: 'RO', label: 'Rondônia'},
+        {value: 'RR', label: 'Roraima'},
+        {value: 'SC', label: 'Santa Catarina'},
+        {value: 'SP', label: 'São Paulo'},
+        {value: 'SE', label: 'Sergipe'},
+        {value: 'TO', label: 'Tocantins'},
+      ],
     };
     this.getCasosPais = this.getCasosPais.bind(this);
     this.getCasosEstado = this.getCasosEstado.bind(this);
-    this.filterText = this.filterText.bind(this);
   }
+
   //Primeira Tela = 1: Listar estado com maior numero de casos
   // todos os estados do brasil =>  https://covid19-brazil-api.now.sh/api/report/v1
   // todos os casos do país => https://covid19-brazil-api.now.sh//api/report/v1/brazil
   // lista de casos por estado => https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/rj
   // lista de casos no brasil por data https://covid19-brazil-api.now.sh/api/report/v1/brazil/api/report/v1/brazil/20200318
 
-  componentDidMount() {
-    this.getCasosPais();
-  }
-  filterText(text) {
-    this.setState({
-      inputValue: text.replace(/([^\d\s/-])/g, ''),
-    });
-  }
+  componentDidMount() {}
 
-  getCasosEstado() {
-    // eslint-disable-next-line eqeqeq
-    console.log(this.state.inputValue);
-    this.setState({
-      casos: '',
-      confirmados: '',
-      mortes: '',
-      recuperados: '',
-      updated_at: '',
-    });
-    fetch(
-      `https://covid19-brazil-api.now.sh/api/report/v1/${
-        this.state.inputValue
-      }`,
-    )
-      .then(r => r.json())
-      .then(json => {
-        let s = this.state;
-        s.casos = json.data.cases;
-        s.confirmados = json.data.confirmed;
-        s.mortes = json.data.deaths;
-        s.recuperados = json.data.recovered;
-        s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
-          locale: pt,
-        });
-        this.setState(s);
-        console.log(json);
-      })
-      .catch(error => {
-        this.setState({
-          error: true,
-          loading: false,
-        });
+  getCasosEstado(value) {
+    if (value === 'BR') {
+      this.getCasosPais();
+    }
+
+    if (value === null) {
+      this.setState({action: true});
+    } else {
+      this.setState({
+        casos: '',
+        confirmados: '',
+        mortes: '',
+        recuperados: '',
+        updated_at: '',
       });
+      const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
+      console.log(url);
+      fetch(url)
+        .then(r => r.json())
+        .then(json => {
+          let s = this.state;
+          s.casos = json.suspects;
+          s.confirmados = json.cases;
+          s.mortes = json.deaths;
+          s.recuperados = json.refuses;
+          s.updated_at = format(parseISO(json.datetime), "dd 'de' MMMM'", {
+            locale: pt,
+          });
+          s.action = false;
+          this.setState(s);
+          console.log(json);
+        })
+        .catch(error => {
+          this.setState({
+            error: true,
+            loading: false,
+          });
+        });
+
+      Keyboard.dismiss();
+    }
   }
 
   getCasosPais() {
@@ -167,6 +154,7 @@ export default class Home extends Component {
       recuperados: '',
       updated_at: '',
     });
+
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
       .then(r => r.json())
       .then(json => {
@@ -178,6 +166,7 @@ export default class Home extends Component {
         s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
           locale: pt,
         });
+        s.action = false;
         this.setState(s);
         //console.log(json);
       })
@@ -190,110 +179,252 @@ export default class Home extends Component {
   }
 
   render() {
-    return (
-      <DismissKeyboard>
-        <Container>
-          <StatusBar hidden />
-          <ViewHeader>
-            <LogoTop source={require('../../../assets/Icon.png')} />
-            <InputState
-              placeholder="Verifique por estado"
-              placeholderTextColor="black"
-              underlineColorAndroid="transparent"
-              value={this.state.inputValue}
-              onChangeText={this.filterText}
-            />
-            <TouchableSearch onPress={this.getCasosEstado}>
+    if (this.state.action == true) {
+      return (
+        <DismissKeyboard>
+          <Container>
+            <StatusBar hidden />
+            <ViewHeader>
+              <LogoTop source={require('../../../assets/Icon.png')} />
+              <RNPickerSelect
+                placeholder={{
+                  label: 'Verifique por estado',
+                  value: null,
+                }}
+                onValueChange={value => this.getCasosEstado(value)}
+                items={this.state.items}
+                style={{
+                  inputAndroid: {
+                    backgroundColor: 'transparent',
+                    fontSize: 17,
+                    color: 'black',
+                    marginTop: 25,
+                    marginLeft: 150,
+                    width: 204,
+                    height: 40,
+                    fontFamily: 'Montserrat',
+                    lineHeight: 20,
+                    textAlign: 'right',
+                    fontWeight: '700',
+                  },
+                  placeholder: {
+                    color: 'black',
+                    fontSize: 17,
+                    fontWeight: 'bold',
+                  },
+                }}
+                value={this.state.favSport3}
+                useNativeAndroidPickerStyle={false}
+              />
+
               <SearchIcon source={require('../../../assets/Searchicon.png')} />
-            </TouchableSearch>
-          </ViewHeader>
-          <MainCard>
-            <Card1
-              style={{
-                shadowColor: '#4643D3',
-                shadowOffset: {
-                  width: 0,
-                  height: 12,
-                },
-                shadowOpacity: 0.58,
-                shadowRadius: 16.0,
+            </ViewHeader>
 
-                elevation: 24,
-              }}>
-              <TextViewCase1>Casos suspeitos</TextViewCase1>
-              <TextNumberCase1>{this.state.casos}</TextNumberCase1>
-              <PorcentCase1>+8.5%</PorcentCase1>
-              <ImageUp1 source={require('../../../assets/imageUp.png')} />
-              <ShowMoreCase1>
-                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-              </ShowMoreCase1>
-            </Card1>
-            <Card2
-              style={{
-                shadowColor: '#4643D3',
-                shadowOffset: {
-                  width: 0,
-                  height: 12,
-                },
-                shadowOpacity: 0.58,
-                shadowRadius: 16.0,
+            <MainCard>
+              <Card1
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
 
-                elevation: 24,
-              }}>
-              <TextViewCase2>Confirmados</TextViewCase2>
-              <TextNumberCase2>{this.state.confirmados}</TextNumberCase2>
-              <PorcentCase2>+8.5%</PorcentCase2>
-              <ImageDown2 source={require('../../../assets/imageDown.png')} />
-              <ShowMoreCase2>
-                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-              </ShowMoreCase2>
-            </Card2>
-            <Card3
-              style={{
-                shadowColor: '#4643D3',
-                shadowOffset: {
-                  width: 0,
-                  height: 12,
-                },
-                shadowOpacity: 0.58,
-                shadowRadius: 16.0,
+                  elevation: 24,
+                }}>
+                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+              </Card1>
+              <Card2
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
 
-                elevation: 24,
-              }}>
-              <TextViewCase3>Mortes</TextViewCase3>
-              <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
-              <PorcentCase3>+8.5%</PorcentCase3>
-              <ImageUp3 source={require('../../../assets/imageUp.png')} />
-              <ShowMoreCase3>
-                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-              </ShowMoreCase3>
-            </Card3>
-            <Card4
-              style={{
-                shadowColor: '#4643D3',
-                shadowOffset: {
-                  width: 0,
-                  height: 12,
-                },
-                shadowOpacity: 0.58,
-                shadowRadius: 16.0,
+                  elevation: 24,
+                }}>
+                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+              </Card2>
+              <Card3
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
 
-                elevation: 24,
-              }}>
-              <TextViewCase4>Curados</TextViewCase4>
-              <TextNumberCase4>{this.state.recuperados}</TextNumberCase4>
-              <PorcentCase4>+8.5%</PorcentCase4>
-              <ImageDown4 source={require('../../../assets/imageDown.png')} />
-              <ShowMoreCase4>
-                <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-              </ShowMoreCase4>
-            </Card4>
-          </MainCard>
-          <ViewInfo>
-            <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
-          </ViewInfo>
-        </Container>
-      </DismissKeyboard>
-    );
+                  elevation: 24,
+                }}>
+                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+              </Card3>
+              <Card4
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                }}>
+                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
+              </Card4>
+            </MainCard>
+            <ViewInfo>
+              <InfoUpdate>
+                Desenvolvedores: Daniel Matheus & Lucas Souza
+              </InfoUpdate>
+            </ViewInfo>
+          </Container>
+        </DismissKeyboard>
+      );
+    } else {
+      return (
+        <DismissKeyboard>
+          <Container>
+            <StatusBar hidden />
+            <ViewHeader>
+              <LogoTop source={require('../../../assets/Icon.png')} />
+              <RNPickerSelect
+                placeholder={{
+                  label: 'Verifique por estado',
+                  value: null,
+                }}
+                onValueChange={value => this.getCasosEstado(value)}
+                items={this.state.items}
+                style={{
+                  inputAndroid: {
+                    backgroundColor: 'transparent',
+                    fontSize: 17,
+                    color: 'black',
+                    marginTop: 25,
+                    marginLeft: 150,
+                    width: 204,
+                    height: 40,
+                    fontFamily: 'Montserrat',
+                    lineHeight: 20,
+                    textAlign: 'right',
+                    fontWeight: '700',
+                  },
+                  placeholder: {
+                    color: 'black',
+                    fontSize: 17,
+                    fontWeight: 'bold',
+                  },
+                }}
+                value={this.state.favSport3}
+                useNativeAndroidPickerStyle={false}
+              />
+
+              <SearchIcon source={require('../../../assets/Searchicon.png')} />
+            </ViewHeader>
+
+            <MainCard>
+              <Card1
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                }}>
+                <TextViewCase1>Casos suspeitos</TextViewCase1>
+                <ViewText>
+                  <TextNumberCase>{this.state.casos}</TextNumberCase>
+                  <PorcentCaseUp>+15.5%</PorcentCaseUp>
+                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
+                </ViewText>
+                <ShowMoreCase1>
+                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                </ShowMoreCase1>
+              </Card1>
+              <Card2
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                }}>
+                <TextViewCase2>Confirmados</TextViewCase2>
+                <ViewText>
+                  <TextNumberCase>{this.state.confirmados}</TextNumberCase>
+                  <PorcentCaseUp>+30.7%</PorcentCaseUp>
+                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
+                </ViewText>
+                <ShowMoreCase1>
+                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                </ShowMoreCase1>
+              </Card2>
+              <Card3
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                }}>
+                <TextViewCase3>Mortes</TextViewCase3>
+                <ViewText>
+                  <TextNumberCase>{this.state.mortes}</TextNumberCase>
+                  <PorcentCaseUp>+22.4%</PorcentCaseUp>
+                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
+                </ViewText>
+                <ShowMoreCase1>
+                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                </ShowMoreCase1>
+              </Card3>
+              <Card4
+                style={{
+                  shadowColor: '#4643D3',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 0.58,
+                  shadowRadius: 16.0,
+
+                  elevation: 24,
+                }}>
+                <TextViewCase4>Negativos</TextViewCase4>
+                <ViewText>
+                  <TextNumberCase>{this.state.recuperados}</TextNumberCase>
+                  <PorcentCaseDown>+5.9%</PorcentCaseDown>
+                  <ImageDown1
+                    source={require('../../../assets/imageDown.png')}
+                  />
+                </ViewText>
+                <ShowMoreCase1>
+                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                </ShowMoreCase1>
+              </Card4>
+            </MainCard>
+            <ViewInfo>
+              <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
+            </ViewInfo>
+          </Container>
+        </DismissKeyboard>
+      );
+    }
   }
 }
