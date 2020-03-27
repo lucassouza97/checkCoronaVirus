@@ -119,7 +119,7 @@ export default class Home extends Component {
         updated_at: '',
       });
       const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
-      console.log(url);
+
       fetch(url)
         .then(r => r.json())
         .then(json => {
@@ -133,7 +133,6 @@ export default class Home extends Component {
           });
           s.action = false;
           this.setState(s);
-          console.log(json);
         })
         .catch(error => {
           this.setState({
@@ -168,7 +167,6 @@ export default class Home extends Component {
         });
         s.action = false;
         this.setState(s);
-        //console.log(json);
       })
       .catch(error => {
         this.setState({
