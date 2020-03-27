@@ -29,30 +29,30 @@ export const MainCard = styled.View`
   flex: 5;
   flex-direction: column;
   border-radius: 24px;
-  width: ${DEVICE_WIDTH - 100 + 'px'};
+  width: ${DEVICE_WIDTH - 60 + 'px'};
 `;
 export const Card1 = styled.View`
   flex: 2;
-  background: #ffffff;
+  background: #6495ed;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card2 = styled.View`
   flex: 2;
-  background: #ffffff;
+  background: #fffacd;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card3 = styled.View`
   flex: 2;
-  background: #ffffff;
+  background: #ff6347;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card4 = styled.View`
   flex: 2;
   flex-direction: column;
-  background: #ffffff;
+  background: #adff2f;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
@@ -105,7 +105,7 @@ export const ViewLogo = styled.View`
 export const TextViewLoading = styled.Text`
   /* height: 20px; */
   text-align: center;
-  top: 95px;
+  top: 70%;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
@@ -131,7 +131,7 @@ export const TextViewCase1 = styled.Text`
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const TextNumberCase = styled.Text`
@@ -147,7 +147,7 @@ export const TextNumberCase = styled.Text`
   font-size: 28px;
   line-height: 34px;
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const ShowMoreCase1 = styled.TouchableOpacity`
@@ -229,7 +229,7 @@ export const TextViewCase2 = styled.Text`
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const TextNumberCase2 = styled.Text`
@@ -245,7 +245,7 @@ export const TextNumberCase2 = styled.Text`
   font-size: 28px;
   line-height: 34px;
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const ShowMoreCase2 = styled.TouchableOpacity`
@@ -273,7 +273,7 @@ export const TextViewCase3 = styled.Text`
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const TextNumberCase3 = styled.Text`
@@ -289,7 +289,7 @@ export const TextNumberCase3 = styled.Text`
   font-size: 28px;
   line-height: 34px;
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #ffffff;
 `;
 
 export const ShowMoreCase3 = styled.TouchableOpacity`
@@ -316,7 +316,7 @@ export const TextViewCase4 = styled.Text`
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-  color: #12121f;
+  color: #000;
 `;
 
 export const TextNumberCase4 = styled.Text`
