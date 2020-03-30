@@ -54,7 +54,7 @@ export default class Contato extends Component {
 
           <TextContact2
             onPress={() => Linking.openURL('mailto:checkcoronav@gmail.com')}
-            title="support@example.com">
+            title="Fale Conosco">
             equipecheckc@gmail.com
           </TextContact2>
         </ViewInfo>
@@ -97,6 +97,15 @@ export default class Contato extends Component {
         <ViewCopyrigth>
           <TextCopyrigth>Todos direitos reservados a equipe</TextCopyrigth>
           <LogoImage source={require('../../../assets/logo_check.png')} />
+          <Text
+            onPress={() =>
+              Linking.openURL(
+                'https://github.com/lucassouza97/checkCoronaVirus',
+              )
+            }>
+            {' '}
+            v1.0{' '}
+          </Text>
         </ViewCopyrigth>
       </Container>
     );

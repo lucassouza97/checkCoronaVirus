@@ -478,8 +478,6 @@ export default class Home extends Component {
                 <TextViewCase1>Casos suspeitos</TextViewCase1>
                 <ViewText>
                   <TextNumberCase>{this.state.casos}</TextNumberCase>
-                  <PorcentCaseUp>+15.5%</PorcentCaseUp>
-                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
                   <IconCheck
@@ -502,8 +500,6 @@ export default class Home extends Component {
                 <TextViewCase2>Confirmados</TextViewCase2>
                 <ViewText>
                   <TextNumberCase>{this.state.confirmados}</TextNumberCase>
-                  <PorcentCaseUp>+30.7%</PorcentCaseUp>
-                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
                   <IconConfirmados
@@ -526,8 +522,6 @@ export default class Home extends Component {
                 <TextViewCase3>Mortes</TextViewCase3>
                 <ViewText>
                   <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
-                  <PorcentCaseUp>+22.4%</PorcentCaseUp>
-                  <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
                   <IconDeaths
