@@ -5,7 +5,7 @@
   
 <h3> Check Corona Virus </h3>
 
-Devido a pandemia do COVID-19 que tem assustado todo o mundo, juntamente a um amigo [Daniel Matheus](https://www.linkedin.com/in/daniel-matheus-785606129/) decidimos criar um app que trouxesse as informações atuais sobre os casos que vem sido descobertos no Brasil. Decidimos criar o app baseado na stack do react native, ao pesquisar na web encontramos a API [COVID-19](https://covid19-brazil-api-docs.now.sh/) do Arthur Ribeiro que busca os dados através de um crawler diretamente do site do Ministério da Saúde. Tivemos o auxílio do Marlon Machado(UX) que desenhou as telas, e do Jonas Emanuel(FullStack) que nos apoiou tirando algumas dúvidas. 
+Devido a pandemia do COVID-19 que tem assustado todo o mundo, juntamente com o [Daniel Matheus](https://www.linkedin.com/in/daniel-matheus-785606129/) decidimos criar um app que trouxesse as informações atuais sobre os casos que vem sido descobertos no Brasil. Decidimos criar o app baseado na stack do react native, ao pesquisar na web encontramos a API [COVID-19](https://covid19-brazil-api-docs.now.sh/) do Arthur Ribeiro que busca os dados através de um crawler diretamente do site do Ministério da Saúde. Tivemos o auxílio do Marlon Machado(UX) que desenhou as telas, e do Jonas Emanuel(FullStack) que nos apoiou tirando algumas dúvidas. 
 
 
 <h3>O que foi utilizado?</h3>
