@@ -80,6 +80,18 @@ export const SearchIcon = styled.Image`
   right: 5.33%;
   top: 31%;
 `;
+export const IconCheck = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
+export const IconConfirmados = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
+export const IconDeaths = styled.Image`
+  width: 50px;
+  height: 50px;
+`;
 
 export const InputState = styled.TextInput`
   position: absolute;
@@ -158,7 +170,7 @@ export const ShowMoreCase1 = styled.TouchableOpacity`
   left: 67.87%;
   right: 6.87%;
   /* top: calc(50% - 17px/2 - 275.5px); */
-  top: 18px;
+  top: 30px;
 `;
 
 export const PorcentCaseUp = styled.Text`

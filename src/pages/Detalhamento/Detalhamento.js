@@ -117,12 +117,14 @@ export default class Detalhamento extends Component {
       const totalSudeste =
         (await AsyncStorage.getItem('totalSudeste')) || 'none';
       const totalSul = (await AsyncStorage.getItem('totalSul')) || 'none';
+      const updated_at = (await AsyncStorage.getItem('updated_at')) || 'none';
       this.setState({
         norte: JSON.parse(totalNorte),
         nordeste: JSON.parse(totalNordeste),
         centroOeste: JSON.parse(totalCentroOeste),
         sudeste: JSON.parse(totalSudeste),
         sul: JSON.parse(totalSul),
+        updated_at: updated_at,
       });
     } catch (error) {
       console.log('Error ao pegar os dados' + error);
@@ -287,7 +289,7 @@ export default class Detalhamento extends Component {
             </ViewDados>
           </MainCard>
           <ViewInfo>
-            <InfoUpdate>Atualizado em: {this.state.sul.datetime}</InfoUpdate>
+            <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
           </ViewInfo>
         </ScrollView>
       </Container>

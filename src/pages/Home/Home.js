@@ -37,6 +37,9 @@ import {
   TextNumberCase3,
   TextViewLoading,
   ImageLoading,
+  IconCheck,
+  IconConfirmados,
+  IconDeaths,
 } from './styles';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -114,6 +117,14 @@ export default class Home extends Component {
     fetch('https://covid19-brazil-api.now.sh/api/report/v1')
       .then(r => r.json())
       .then(json => {
+        const updated_at = format(
+          parseISO(json.data[0].datetime),
+          "dd 'de' MMMM'",
+          {
+            locale: pt,
+          },
+        );
+
         const norte = json.data.filter(state => {
           if (
             state.uf == 'AC' ||
@@ -218,6 +229,7 @@ export default class Home extends Component {
           JSON.stringify(totalSudeste),
           JSON.stringify(totalCentroOeste),
           JSON.stringify(totalSul),
+          updated_at,
         );
       })
       .catch(error => {});
@@ -297,6 +309,7 @@ export default class Home extends Component {
     totalSudeste,
     totalCentroOeste,
     totalSul,
+    updated_at,
   ) {
     try {
       await AsyncStorage.setItem('totalNorte', totalNorte);
@@ -304,6 +317,7 @@ export default class Home extends Component {
       await AsyncStorage.setItem('totalSudeste', totalSudeste);
       await AsyncStorage.setItem('totalCentroOeste', totalCentroOeste);
       await AsyncStorage.setItem('totalSul', totalSul);
+      await AsyncStorage.setItem('updated_at', updated_at);
     } catch (error) {
       console.log('Error saving data' + error);
     }
@@ -468,7 +482,9 @@ export default class Home extends Component {
                   <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
-                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                  <IconCheck
+                    source={require('../../../assets/iconVisto.png')}
+                  />
                 </ShowMoreCase1>
               </Card1>
               <Card2
@@ -490,7 +506,9 @@ export default class Home extends Component {
                   <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
-                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                  <IconConfirmados
+                    source={require('../../../assets/iconDeaths.png')}
+                  />
                 </ShowMoreCase1>
               </Card2>
               <Card3
@@ -512,7 +530,9 @@ export default class Home extends Component {
                   <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
                 <ShowMoreCase1>
-                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
+                  <IconDeaths
+                    source={require('../../../assets/iconMorte.png')}
+                  />
                 </ShowMoreCase1>
               </Card3>
             </MainCard>
