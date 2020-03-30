@@ -79,14 +79,6 @@ export default class Contato extends Component {
           <TextSupport2
             onPress={() =>
               Linking.openURL(
-                'https://www.linkedin.com/in/marlon-machado-011237179/',
-              )
-            }>
-            - Marlon Machado (UX)
-          </TextSupport2>
-          <TextSupport2
-            onPress={() =>
-              Linking.openURL(
                 'https://www.linkedin.com/in/jonas-emanuel-076960b0/',
               )
             }>

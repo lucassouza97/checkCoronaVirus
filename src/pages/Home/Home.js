@@ -67,7 +67,7 @@ export default class Home extends Component {
       action: true,
 
       items: [
-        {value: 'BR', label: 'Brasil'},
+        //{value: 'BR', label: 'Brasil'},
         {value: 'AC', label: 'Acre'},
         {value: 'AL', label: 'Alagoas'},
         {value: 'AP', label: 'Amapá'},
@@ -481,7 +481,7 @@ export default class Home extends Component {
                 </ViewText>
                 <ShowMoreCase1>
                   <IconCheck
-                    source={require('../../../assets/iconVisto.png')}
+                    source={require('../../../assets/iconInterrogacao.png')}
                   />
                 </ShowMoreCase1>
               </Card1>

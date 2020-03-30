@@ -81,16 +81,16 @@ export const SearchIcon = styled.Image`
   top: 31%;
 `;
 export const IconCheck = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;
 export const IconConfirmados = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;
 export const IconDeaths = styled.Image`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 `;
 
 export const InputState = styled.TextInput`
