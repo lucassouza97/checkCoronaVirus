@@ -27,8 +27,10 @@ Também foram utilizados o eslint, prettier e editor config para estilização e
 - [Prettier](https://github.com/prettier/prettier)
 - [EditorConfig](https://editorconfig.org/)
 
-<h3>Telas</h3>
+<h3>Link disponível para Download:<h3>
+<span>https://drive.google.com/file/d/1ELJVc-Z_pmwdViQRS0v8PCjKUFWXQWUI/view</span>
 
+<h3>Telas</h3>
 <div class="row" style="box-sizing: border-box;">
  <div class="column" style="width: auto; height: auto; padding: 10px; float: left;">
   <h4>Tela 1</h4>
