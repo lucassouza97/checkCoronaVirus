@@ -96,7 +96,6 @@ export default class Home extends Component {
     };
     this.getCasosPais = this.getCasosPais.bind(this);
     this.getCasosEstado = this.getCasosEstado.bind(this);
-    this.getCasosRegiao = this.getCasosRegiao.bind(this);
     this.getInfoEstadoGeral = this.getInfoEstadoGeral.bind(this);
   }
 
@@ -107,56 +106,129 @@ export default class Home extends Component {
   // lista de casos no brasil por data https://covid19-brazil-api.now.sh/api/report/v1/brazil/api/report/v1/brazil/20200318
 
   componentDidMount() {
-    this.getCasosRegiao();
+    //this.getCasosRegiao();
     this.getInfoEstadoGeral();
-  }
-
-  getCasosRegiao() {
-    fetch(
-      'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalRegiao',
-      {
-        method: 'GET',
-        withCredentials: true,
-        credentials: 'include',
-        headers: {
-          'x-parse-application-id': 'unAFkcaNDeXajurGB7LChj8SgQYS2ptm', //it can be iPhone or your any other attribute
-          'Content-Type': 'application/json',
-        },
-      },
-    )
-      .then(r => r.json())
-      .then(json => {
-        this.saveCoord(
-          json.results[0].qtd.toString(), //Qtd de casos confirmados Norte
-          json.results[1].qtd.toString(), //Qtd de casos confirmados Nordeste
-          json.results[2].qtd.toString(), //Qtd de casos confirmados Centro-Oeste
-          json.results[3].qtd.toString(), //Qtd de casos confirmados Sudeste
-          json.results[4].qtd.toString(), //Qtd de casos confirmados Sul
-          format(
-            parseISO(json.results[0].updatedAt),
-            "dd 'de' MMMM', ás' H:mm'h'",
-            {
-              locale: pt,
-            },
-          ),
-        );
-        console.log(json.results[0].qtd);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }
 
   getInfoEstadoGeral() {
     fetch('https://covid19-brazil-api.now.sh/api/report/v1')
       .then(r => r.json())
       .then(json => {
-        console.log(json);
-        //const regiaoNorte = '';
-        //const regiaoNordeste = '';
-        //const regiaoCentroOeste = '';
-        //const sudeste = '';
-        //const sul = [json.data.uf[0]['SC'].cases];
+        const norte = json.data.filter(state => {
+          if (
+            state.uf == 'AC' ||
+            state.uf == 'AP' ||
+            state.uf == 'AM' ||
+            state.uf == 'PA' ||
+            state.uf == 'RO' ||
+            state.uf == 'RR' ||
+            state.uf == 'TO'
+          ) {
+            return state;
+          }
+        });
+        const totalNorte = norte.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            cases: x.cases + y.cases, //casos confirmados
+            suspects: x.suspects + y.suspects,
+            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
+              locale: pt,
+            }),
+          };
+        });
+
+        const nordeste = json.data.filter(state => {
+          if (
+            state.uf == 'AL' ||
+            state.uf == 'BA' ||
+            state.uf == 'CE' ||
+            state.uf == 'MA' ||
+            state.uf == 'PB' ||
+            state.uf == 'PI' ||
+            state.uf == 'PE' ||
+            state.uf == 'RN' ||
+            state.uf == 'SE'
+          ) {
+            return state;
+          }
+        });
+        const totalNordeste = nordeste.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            cases: x.cases + y.cases, //casos confirmados
+            suspects: x.suspects + y.suspects,
+            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
+              locale: pt,
+            }),
+          }; //casos
+        });
+
+        const centroOeste = json.data.filter(state => {
+          if (
+            state.uf == 'DF' ||
+            state.uf == 'GO' ||
+            state.uf == 'MT' ||
+            state.uf == 'MS'
+          ) {
+            return state;
+          }
+        });
+        const totalCentroOeste = centroOeste.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            cases: x.cases + y.cases, //casos confirmados
+            suspects: x.suspects + y.suspects,
+            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
+              locale: pt,
+            }),
+          }; //casos
+        });
+
+        const sudeste = json.data.filter(state => {
+          if (
+            state.uf == 'ES' ||
+            state.uf == 'MG' ||
+            state.uf == 'RJ' ||
+            state.uf == 'SP'
+          ) {
+            return state;
+          }
+        });
+        const totalSudeste = sudeste.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            cases: x.cases + y.cases, //casos confirmados
+            suspects: x.suspects + y.suspects,
+            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
+              locale: pt,
+            }),
+          }; //casos
+        });
+
+        const sul = json.data.filter(state => {
+          if (state.uf == 'SC' || state.uf == 'PR' || state.uf == 'RS') {
+            return state;
+          }
+        });
+        const totalSul = sul.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            cases: x.cases + y.cases, //casos confirmados
+            suspects: x.suspects + y.suspects,
+            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
+              locale: pt,
+            }),
+          }; //casos
+        });
+
+        this.saveDados(
+          JSON.stringify(totalNorte),
+          JSON.stringify(totalNordeste),
+          JSON.stringify(totalSudeste),
+          JSON.stringify(totalCentroOeste),
+          JSON.stringify(totalSul),
+        );
       })
       .catch(error => {});
   }
@@ -229,15 +301,19 @@ export default class Home extends Component {
         });
       });
   }
-
-  async saveCoord(qtdReg1, qtdReg2, qtdReg3, qtdReg4, qtdReg5, updated_at) {
+  async saveDados(
+    totalNorte,
+    totalNordeste,
+    totalSudeste,
+    totalCentroOeste,
+    totalSul,
+  ) {
     try {
-      await AsyncStorage.setItem('qtdReg1', qtdReg1);
-      await AsyncStorage.setItem('qtdReg2', qtdReg2);
-      await AsyncStorage.setItem('qtdReg3', qtdReg3);
-      await AsyncStorage.setItem('qtdReg4', qtdReg4);
-      await AsyncStorage.setItem('qtdReg5', qtdReg5);
-      await AsyncStorage.setItem('updated_at', updated_at);
+      await AsyncStorage.setItem('totalNorte', totalNorte);
+      await AsyncStorage.setItem('totalNordeste', totalNordeste);
+      await AsyncStorage.setItem('totalSudeste', totalSudeste);
+      await AsyncStorage.setItem('totalCentroOeste', totalCentroOeste);
+      await AsyncStorage.setItem('totalSul', totalSul);
     } catch (error) {
       console.log('Error saving data' + error);
     }

@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {format, parseISO} from 'date-fns';
+import {format, parseISO, parse} from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
   LineChart,
@@ -51,18 +51,12 @@ export default class Detalhamento extends Component {
     super(props);
     this.state = {
       data: [],
-      casos: '',
-      suspeitos: '',
-      mortes: '',
-      recusa: '',
       updated_at: '',
-      estado: '',
-      uf: '',
-      qtdReg1: 0,
-      qtdReg2: 0,
-      qtdReg3: 0,
-      qtdReg4: 0,
-      qtdReg5: 0,
+      norte: {cases: 0, datetime: '', deaths: 0, suspects: 0},
+      nordeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
+      centroOeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
+      sudeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
+      sul: {cases: 0, datetime: '', deaths: 0, suspects: 0},
     };
     this.loadStates = this.loadStates.bind(this);
   }
@@ -115,59 +109,58 @@ export default class Detalhamento extends Component {
 
   async getCasosReg() {
     try {
-      const qtdReg1 = (await AsyncStorage.getItem('qtdReg1')) || 'none';
-      const qtdReg2 = (await AsyncStorage.getItem('qtdReg2')) || 'none';
-      const qtdReg3 = (await AsyncStorage.getItem('qtdReg3')) || 'none';
-      const qtdReg4 = (await AsyncStorage.getItem('qtdReg4')) || 'none';
-      const qtdReg5 = (await AsyncStorage.getItem('qtdReg5')) || 'none';
-      const updated_at = (await AsyncStorage.getItem('updated_at')) || 'none';
-      console.log(updated_at);
+      const totalNorte = (await AsyncStorage.getItem('totalNorte')) || 'none';
+      const totalNordeste =
+        (await AsyncStorage.getItem('totalNordeste')) || 'none';
+      const totalCentroOeste =
+        (await AsyncStorage.getItem('totalCentroOeste')) || 'none';
+      const totalSudeste =
+        (await AsyncStorage.getItem('totalSudeste')) || 'none';
+      const totalSul = (await AsyncStorage.getItem('totalSul')) || 'none';
       this.setState({
-        qtdReg1: Number(qtdReg1),
-        qtdReg2: Number(qtdReg2),
-        qtdReg3: Number(qtdReg3),
-        qtdReg4: Number(qtdReg4),
-        qtdReg5: Number(qtdReg5),
-        updated_at: updated_at,
+        norte: JSON.parse(totalNorte),
+        nordeste: JSON.parse(totalNordeste),
+        centroOeste: JSON.parse(totalCentroOeste),
+        sudeste: JSON.parse(totalSudeste),
+        sul: JSON.parse(totalSul),
       });
     } catch (error) {
       console.log('Error ao pegar os dados' + error);
     }
   }
-
   render() {
     const data = [
       {
         name: 'Norte',
-        casos: this.state.qtdReg1,
+        casos: this.state.norte.cases,
         color: 'rgba(148, 222, 15)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
         name: 'Nordeste',
-        casos: this.state.qtdReg2,
+        casos: this.state.nordeste.cases,
         color: 'rgb(255,149,8)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
         name: 'Centro-Oeste',
-        casos: this.state.qtdReg3,
+        casos: this.state.centroOeste.cases,
         color: 'rgba(255,206,58)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
         name: 'Sudeste',
-        casos: this.state.qtdReg4,
+        casos: this.state.sudeste.cases,
         color: 'rgba(253,2,11)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
       },
       {
         name: 'Sul',
-        casos: this.state.qtdReg5,
+        casos: this.state.sul.cases,
         color: 'rgb(87, 150, 255)',
         legendFontColor: '#7F7F7F',
         legendFontSize: 15,
@@ -209,15 +202,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn>
                 <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>0</TextNumber>
+                <TextNumber>{this.state.norte.suspects}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.qtdReg1}</TextNumber>
+                <TextNumber>{this.state.norte.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Mortes</TextTitleCard>
-                <TextNumber>2000</TextNumber>
+                <TextNumber>{this.state.norte.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -227,14 +220,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn>
                 <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>0</TextNumber>
+                <TextNumber>{this.state.nordeste.suspects}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.qtdReg2}</TextNumber>
+                <TextNumber>{this.state.nordeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Mortes</TextTitleCard>
+                <TextNumber>{this.state.nordeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -244,14 +238,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn>
                 <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>0</TextNumber>
+                <TextNumber>{this.state.centroOeste.suspects}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.qtdReg3}</TextNumber>
+                <TextNumber>{this.state.centroOeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Mortes</TextTitleCard>
+                <TextNumber>{this.state.centroOeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -261,14 +256,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn>
                 <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>0</TextNumber>
+                <TextNumber>{this.state.sudeste.suspects}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.qtdReg4}</TextNumber>
+                <TextNumber>{this.state.sudeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Mortes</TextTitleCard>
+                <TextNumber>{this.state.sudeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -278,19 +274,20 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn>
                 <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>0</TextNumber>
+                <TextNumber>{this.state.sul.suspects}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.qtdReg5}</TextNumber>
+                <TextNumber>{this.state.sul.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn>
                 <TextTitleCard>Mortes</TextTitleCard>
+                <TextNumber>{this.state.sul.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
           </MainCard>
           <ViewInfo>
-            <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
+            <InfoUpdate>Atualizado em: {this.state.sul.datetime}</InfoUpdate>
           </ViewInfo>
         </ScrollView>
       </Container>
