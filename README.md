@@ -5,20 +5,20 @@
   
 <h3> Check Corona Virus </h3>
 
-Devido a pandemia do COVID-19 que tem assustado todo o mundo, jutantamente a um amigo[Daniel Matheus](https://www.linkedin.com/in/daniel-matheus-785606129/) decidimos criar um app que trouxesse as informações atuais sobre os casos que vem sido descobertos no Brasil. Decidimos criar o app baseado na stack do react native, ao pesquisar na web encontramos a API [COVID-19](https://nodejs.org/) do Arthur Ribeiro que busca os dados através de um crawler diretamente do site do Ministério da Saúde. Tivemos o auxílio do Marlon Machado(UX) que desenhou as telas, e do Jonas Emanuel(FullStack) que nos apoiou tirando algumas dúvidas. 
+Devido a pandemia do COVID-19 que tem assustado todo o mundo, jutantamente a um amigo[Daniel Matheus](https://www.linkedin.com/in/daniel-matheus-785606129/) decidimos criar um app que trouxesse as informações atuais sobre os casos que vem sido descobertos no Brasil. Decidimos criar o app baseado na stack do react native, ao pesquisar na web encontramos a API [COVID-19](https://covid19-brazil-api-docs.now.sh/) do Arthur Ribeiro que busca os dados através de um crawler diretamente do site do Ministério da Saúde. Tivemos o auxílio do Marlon Machado(UX) que desenhou as telas, e do Jonas Emanuel(FullStack) que nos apoiou tirando algumas dúvidas. 
 
 
 <h3>O que foi utilizado?</h3>
 
-- [React Native](https://nodejs.org/)
+- [React Native](https://reactnative.dev/)
 - [Date-fns](https://github.com/date-fns/date-fns)
-- [React Navigation](https://redis.io/)
-- [React Native Chart Kit](https://www.mongodb.com/)
-- [React Native Select Two](https://www.docker.com/)
-- [React Native Vector Icons](https://github.com/kelektiv/node.bcrypt.js)
-- [React Native Picker Select](https://github.com/auth0/node-jsonwebtoken)
-- [Styled Components](https://github.com/expressjs/express)
-- [JavaScript](https://github.com/expressjs/multer)
+- [React Navigation](https://reactnavigation.org/)
+- [React Native Chart Kit](https://www.npmjs.com/package/react-native-chart-kit#pie-chart)
+- [React Native Select Two](https://www.npmjs.com/package/react-native-select-two)
+- [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+- [React Native Picker Select](https://github.com/lawnstarter/react-native-picker-select)
+- [Styled Components](https://styled-components.com/)
+- [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
 
 
