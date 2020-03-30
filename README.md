@@ -28,7 +28,7 @@ Também foram utilizados o eslint, prettier e editor config para estilização e
 - [EditorConfig](https://editorconfig.org/)
 
 <h3>Link disponível para Download:<h3>
-<span>https://drive.google.com/file/d/1ELJVc-Z_pmwdViQRS0v8PCjKUFWXQWUI/view</span>
+<span>https://bit.ly/3bE0B3H</span>
 
 <h3>Telas</h3>
 <div class="row" style="box-sizing: border-box;">
