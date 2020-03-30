@@ -30,17 +30,17 @@ Também foram utilizados o eslint, prettier e editor config para estilização e
 <h3>Telas</h3>
 
 <div style="box-sizing: border-box;">
- <div class="column" style="width: 33.3%; height: 300px; padding: 10px; float: left;">
+ <div class="column" style="width: 20%; height: 300px; padding: 10px; float: left;">
   <h4>Tela 1</h4>
-    <img src="./assets/tela1.jpeg" alt="Logo">
+    <img src="./assets/tela1.jpeg" alt="Logo" width="300" height="500">
   </div>
-  <div class="column" style="width: 33.3%; height: 300px; padding: 10px; float: left;">
+  <div class="column" style="width: 20%; height: 300px; padding: 10px; float: left;">
     <h4>Tela 2</h4>
-    <img src="./assets/tela2.jpeg" alt="Logo">
+    <img src="./assets/tela2.jpeg" alt="Logo" width="300" height="500">
   </div>
- <div class="column" style="width: 33.3%; height: 300px; padding: 10px; float: left;">
+ <div class="column" style="width: 20%; height: 300px; padding: 10px; float: left;">
     <h4>Tela 3</h4>
-    <img src="./assets/tela3.jpeg" alt="Logo">
+    <img src="./assets/tela3.jpeg" alt="Logo" width="300" height="500">
   </div>
 </div>
 
