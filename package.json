@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/masked-view": "^0.1.7",
     "@react-navigation/bottom-tabs": "^5.2.4",
     "@react-navigation/material-bottom-tabs": "^5.1.6",
@@ -19,6 +20,7 @@
     "react": "16.9.0",
     "react-backdrop-filter": "^2.1.0",
     "react-native": "0.61.5",
+    "react-native-chart-kit": "^5.2.0",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-modal": "^11.5.6",
     "react-native-paper": "^3.6.0",
@@ -27,6 +29,7 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
     "react-native-select-two": "^1.1.0",
+    "react-native-svg": "^12.0.3",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.3.3",
     "react-navigation-stack": "^2.1.1",

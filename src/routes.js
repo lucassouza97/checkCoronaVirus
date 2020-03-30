@@ -37,10 +37,6 @@ export default class MyComponent extends React.Component {
         barStyle={{
           backgroundColor: '#FFFFFF',
           boxShadow: '0px -0.5px 0px rgba(0, 0, 0, 0.3)',
-          position: 'absolute',
-          top: positionTop,
-          bottom: positionBottom,
-          backdropFilter: 'blur(27.1828px)',
           borderTopWidth: 1,
           borderTopColor: '#535c68',
         }}

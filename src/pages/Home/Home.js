@@ -34,10 +34,12 @@ import {
   PorcentCaseUp,
   PorcentCaseDown,
   TextNumberCase,
+  TextNumberCase3,
   TextViewLoading,
   ImageLoading,
 } from './styles';
 
+import AsyncStorage from '@react-native-community/async-storage';
 const DismissKeyboard = ({children}) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     {children}
@@ -57,7 +59,6 @@ export default class Home extends Component {
       confirmados: '',
       recuperados: '',
       suspeitas: '',
-      qtdTestesNeg: '',
       updated_at: '',
       inputValue: '',
       action: true,
@@ -95,6 +96,8 @@ export default class Home extends Component {
     };
     this.getCasosPais = this.getCasosPais.bind(this);
     this.getCasosEstado = this.getCasosEstado.bind(this);
+    this.getCasosRegiao = this.getCasosRegiao.bind(this);
+    this.getInfoEstadoGeral = this.getInfoEstadoGeral.bind(this);
   }
 
   //Primeira Tela = 1: Listar estado com maior numero de casos
@@ -103,10 +106,64 @@ export default class Home extends Component {
   // lista de casos por estado => https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/rj
   // lista de casos no brasil por data https://covid19-brazil-api.now.sh/api/report/v1/brazil/api/report/v1/brazil/20200318
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.getCasosRegiao();
+    this.getInfoEstadoGeral();
+  }
 
-  getCasosEstado(value) {
+  getCasosRegiao() {
+    fetch(
+      'https://xx9p7hp1p7.execute-api.us-east-1.amazonaws.com/prod/PortalRegiao',
+      {
+        method: 'GET',
+        withCredentials: true,
+        credentials: 'include',
+        headers: {
+          'x-parse-application-id': 'unAFkcaNDeXajurGB7LChj8SgQYS2ptm', //it can be iPhone or your any other attribute
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+      .then(r => r.json())
+      .then(json => {
+        this.saveCoord(
+          json.results[0].qtd.toString(), //Qtd de casos confirmados Norte
+          json.results[1].qtd.toString(), //Qtd de casos confirmados Nordeste
+          json.results[2].qtd.toString(), //Qtd de casos confirmados Centro-Oeste
+          json.results[3].qtd.toString(), //Qtd de casos confirmados Sudeste
+          json.results[4].qtd.toString(), //Qtd de casos confirmados Sul
+          format(
+            parseISO(json.results[0].updatedAt),
+            "dd 'de' MMMM', ás' H:mm'h'",
+            {
+              locale: pt,
+            },
+          ),
+        );
+        console.log(json.results[0].qtd);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  getInfoEstadoGeral() {
+    fetch('https://covid19-brazil-api.now.sh/api/report/v1')
+      .then(r => r.json())
+      .then(json => {
+        console.log(json);
+        //const regiaoNorte = '';
+        //const regiaoNordeste = '';
+        //const regiaoCentroOeste = '';
+        //const sudeste = '';
+        //const sul = [json.data.uf[0]['SC'].cases];
+      })
+      .catch(error => {});
+  }
+
+  async getCasosEstado(value) {
     if (value === 'BR') {
+      await AsyncStorage.clear();
       this.getCasosPais();
     } else if (value === null) {
       this.setState({action: true});
@@ -127,7 +184,6 @@ export default class Home extends Component {
           s.casos = json.suspects;
           s.confirmados = json.cases;
           s.mortes = json.deaths;
-          s.recuperados = json.refuses;
           s.updated_at = format(parseISO(json.datetime), "dd 'de' MMMM'", {
             locale: pt,
           });
@@ -150,7 +206,6 @@ export default class Home extends Component {
       casos: '',
       confirmados: '',
       mortes: '',
-      recuperados: '',
       updated_at: '',
     });
 
@@ -161,7 +216,6 @@ export default class Home extends Component {
         s.casos = json.data.cases;
         s.confirmados = json.data.confirmed;
         s.mortes = json.data.deaths;
-        s.recuperados = json.data.recovered;
         s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
           locale: pt,
         });
@@ -176,6 +230,18 @@ export default class Home extends Component {
       });
   }
 
+  async saveCoord(qtdReg1, qtdReg2, qtdReg3, qtdReg4, qtdReg5, updated_at) {
+    try {
+      await AsyncStorage.setItem('qtdReg1', qtdReg1);
+      await AsyncStorage.setItem('qtdReg2', qtdReg2);
+      await AsyncStorage.setItem('qtdReg3', qtdReg3);
+      await AsyncStorage.setItem('qtdReg4', qtdReg4);
+      await AsyncStorage.setItem('qtdReg5', qtdReg5);
+      await AsyncStorage.setItem('updated_at', updated_at);
+    } catch (error) {
+      console.log('Error saving data' + error);
+    }
+  }
   render() {
     if (this.state.action == true) {
       return (
@@ -228,7 +294,6 @@ export default class Home extends Component {
                   },
                   shadowOpacity: 0.58,
                   shadowRadius: 16.0,
-
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
@@ -245,7 +310,6 @@ export default class Home extends Component {
                   },
                   shadowOpacity: 0.58,
                   shadowRadius: 16.0,
-
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
@@ -262,7 +326,6 @@ export default class Home extends Component {
                   },
                   shadowOpacity: 0.58,
                   shadowRadius: 16.0,
-
                   elevation: 24,
                 }}>
                 <TextViewLoading>Aguardando a seleção...</TextViewLoading>
@@ -270,23 +333,6 @@ export default class Home extends Component {
                   source={require('../../../assets/gif_loading.gif')}
                 />
               </Card3>
-              <Card4
-                style={{
-                  shadowColor: '#4643D3',
-                  shadowOffset: {
-                    width: 0,
-                    height: 12,
-                  },
-                  shadowOpacity: 0.58,
-                  shadowRadius: 16.0,
-
-                  elevation: 24,
-                }}>
-                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
-                <ImageLoading
-                  source={require('../../../assets/gif_loading.gif')}
-                />
-              </Card4>
             </MainCard>
             <ViewInfo>
               <InfoUpdate>Copyright: Check Corona Virus</InfoUpdate>
@@ -395,7 +441,7 @@ export default class Home extends Component {
                 }}>
                 <TextViewCase3>Mortes</TextViewCase3>
                 <ViewText>
-                  <TextNumberCase>{this.state.mortes}</TextNumberCase>
+                  <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
                   <PorcentCaseUp>+22.4%</PorcentCaseUp>
                   <ImageUp1 source={require('../../../assets/imageUp.png')} />
                 </ViewText>
@@ -403,30 +449,6 @@ export default class Home extends Component {
                   <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
                 </ShowMoreCase1>
               </Card3>
-              <Card4
-                style={{
-                  shadowColor: '#4643D3',
-                  shadowOffset: {
-                    width: 0,
-                    height: 12,
-                  },
-                  shadowOpacity: 0.58,
-                  shadowRadius: 16.0,
-
-                  elevation: 24,
-                }}>
-                <TextViewCase4>Negativos</TextViewCase4>
-                <ViewText>
-                  <TextNumberCase>{this.state.recuperados}</TextNumberCase>
-                  <PorcentCaseDown>+5.9%</PorcentCaseDown>
-                  <ImageDown1
-                    source={require('../../../assets/imageDown.png')}
-                  />
-                </ViewText>
-                <ShowMoreCase1>
-                  <ShowMoreTextCase>Ver mais</ShowMoreTextCase>
-                </ShowMoreCase1>
-              </Card4>
             </MainCard>
             <ViewInfo>
               <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>

@@ -17,6 +17,8 @@ export const ViewHeader = styled.View`
 `;
 export const ViewInfo = styled.View`
   flex: 1;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
 export const ViewText = styled.View`
@@ -33,26 +35,26 @@ export const MainCard = styled.View`
 `;
 export const Card1 = styled.View`
   flex: 2;
-  background: #6495ed;
+  background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card2 = styled.View`
   flex: 2;
-  background: #fffacd;
+  background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card3 = styled.View`
   flex: 2;
-  background: #ff6347;
+  background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card4 = styled.View`
   flex: 2;
   flex-direction: column;
-  background: #adff2f;
+  background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
@@ -120,13 +122,13 @@ export const TextViewLoading = styled.Text`
 export const TextViewCase1 = styled.Text`
   position: absolute;
   /* height: 20px; */
-  left: 13.87%;
+  left: 10%;
   right: 40%;
   top: 15px;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 16px;
   line-height: 20px;
   /* identical to box height */
@@ -217,7 +219,7 @@ export const ShowMoreTextCase = styled.Text`
 export const TextViewCase2 = styled.Text`
   position: absolute;
   height: 20px;
-  left: 13.87%;
+  left: 10%;
   right: 40%;
   /* top: calc(50% - 20px / 2 - 149px); */
   top: 60px;
@@ -261,7 +263,7 @@ export const TextViewCase3 = styled.Text`
   position: absolute;
   height: 20px;
   width: 25%;
-  left: 13.87%;
+  left: 10%;
   right: 40%;
   /* top: calc(50% - 20px / 2 - 22px); */
   top: 15px;
@@ -278,18 +280,18 @@ export const TextViewCase3 = styled.Text`
 
 export const TextNumberCase3 = styled.Text`
   height: 34px;
-  left: 55.87%;
-  right: 80.8%;
   width: auto;
-  /* top: calc(50% - 34px / 2 + 17px); */
-  top: 10px;
+  left: 68.87%;
+  /* mudei e removi o absolute */
+  top: 15px;
+  /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
   line-height: 34px;
   letter-spacing: 0.25px;
-  color: #ffffff;
+  color: #000;
 `;
 
 export const ShowMoreCase3 = styled.TouchableOpacity`
@@ -304,7 +306,7 @@ export const ShowMoreCase3 = styled.TouchableOpacity`
 export const TextViewCase4 = styled.Text`
   position: absolute;
   /* height: 20px; */
-  left: 13.87%;
+  left: 10%;
   width: 25%;
   right: 50.4%;
   top: 15px;
