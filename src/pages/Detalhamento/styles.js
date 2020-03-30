@@ -141,8 +141,7 @@ export const TextHeader = styled.Text`
 export const TextTitleCard = styled.Text`
   font-family: Red-Hat-Display;
   font-style: normal;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   color: #000;
   margin-top: 10px;
   align-items: center;

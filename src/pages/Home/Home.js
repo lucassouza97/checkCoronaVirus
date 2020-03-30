@@ -132,9 +132,7 @@ export default class Home extends Component {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
             suspects: x.suspects + y.suspects,
-            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
-              locale: pt,
-            }),
+            datetime: x.datetime,
           };
         });
 
@@ -158,9 +156,7 @@ export default class Home extends Component {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
             suspects: x.suspects + y.suspects,
-            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
-              locale: pt,
-            }),
+            datetime: x.datetime,
           }; //casos
         });
 
@@ -179,9 +175,7 @@ export default class Home extends Component {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
             suspects: x.suspects + y.suspects,
-            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
-              locale: pt,
-            }),
+            datetime: x.datetime,
           }; //casos
         });
 
@@ -200,9 +194,7 @@ export default class Home extends Component {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
             suspects: x.suspects + y.suspects,
-            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
-              locale: pt,
-            }),
+            datetime: x.datetime,
           }; //casos
         });
 
@@ -216,9 +208,7 @@ export default class Home extends Component {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
             suspects: x.suspects + y.suspects,
-            datetime: format(parseISO(x.datetime), "dd 'de' MMMM'", {
-              locale: pt,
-            }),
+            datetime: x.datetime,
           }; //casos
         });
 
