@@ -7,6 +7,20 @@ const shadowBox = {
 export const Container = styled.View`
   flex: 1;
 `;
+
+export const ViewCopyrigth = styled.View`
+  flex: 1;
+  align-items: center;
+  margin-bottom: 6%;
+`;
+
+export const ViewInfo = styled.View`
+  flex: 1;
+  align-items: flex-start;
+  margin-left: 5.33%;
+  margin-right: 5.33%;
+`;
+
 export const ImageBackground = styled.ImageBackground`
   position: absolute;
   width: 560px;
@@ -15,52 +29,154 @@ export const ImageBackground = styled.ImageBackground`
   top: 0px;
 `;
 
-export const BackButton = styled.TouchableOpacity`
-  position: absolute;
-  left: 11.73%;
-  right: 74.4%;
-  top: 2.71%;
-  bottom: 94.33%;
-  align-items: center;
-  display: flex;
-`;
-
-export const TextButton = styled.Text`
-  font-family: 'Red Hat Display';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  letter-spacing: 0.02px;
-  color: #4643d3;
-`;
-
-export const BackImage = styled.Image`
-  position: absolute;
-  left: 5.33%;
-  right: 90.4%;
-  top: 3.2%;
-  bottom: 94.88%;
-`;
-
 export const LogoImage = styled.Image`
-  position: absolute;
-  left: 31.73%;
-  right: 26.62%;
-  top: 76.6%;
+  top: 77.6%;
   bottom: 19.07%;
 `;
 
 export const TextCopyrigth = styled.Text`
-  position: absolute;
   height: 17px;
-  left: 20.53%;
-  right: 15.2%;
-  /* top: calc(50% - 17px / 2 + 192.5px);  */
-
+  top: 68.5%;
   font-family: Montserrat;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
+`;
+
+export const TextInfo = styled.Text`
+  height: 22px;
+  top: 30%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 22px;
+  color: #12121f;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+`;
+
+export const TextLink = styled.Text`
+  height: 20px;
+  top: 32%;
+  margin-left: 5.33%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #02287e;
+`;
+
+export const TextContact = styled.Text`
+  height: 22px;
+  top: 30%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 22px;
+  color: #12121f;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+`;
+
+export const TextContact2 = styled.Text`
+  height: 22px;
+  top: 32%;
+  font-family: Montserrat;
+  margin-left: 5.33%;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 22px;
+  color: #02287e;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+`;
+
+export const TextSquad = styled.Text`
+  height: 22px;
+  top: 2%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 22px;
+  color: #12121f;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+`;
+
+export const TextObs = styled.Text`
+  height: 40px;
+  justify-content: flex-start;
+  top: 35%;
+  margin-left: 5.33%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  color: #12121f;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+`;
+export const TitleDevs = styled.Text`
+  margin-left: 4.33%;
+  top: 3%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const TextIntegrants = styled.Text`
+  margin-left: 6.33%;
+  top: 4%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #02287e;
+`;
+export const TextSupport = styled.Text`
+  margin-left: 4.33%;
+  top: 10%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #12121f;
+`;
+
+export const TextSupport2 = styled.Text`
+  margin-left: 5.33%;
+  top: 12%;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 20px;
+  /* identical to box height */
+  letter-spacing: 0.25px;
+  color: #02287e;
+`;
+
+export const IconContact = styled.Image`
+  width: 20px;
+  height: 15px;
 `;
