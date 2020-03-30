@@ -80,7 +80,8 @@ export const ViewGrafico = styled.View`
   width: ${DEVICE_WIDTH - 30}px;
   border: 1px solid #e8e8e8;
   border-radius: 20px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  background: black;
 `;
 export const ViewDados = styled.View`
   flex: 1;
@@ -94,7 +95,7 @@ export const ViewDados = styled.View`
   border-radius: 20px;
 `;
 export const TextGrafico = styled.Text`
-  margin: 20px;
+  margin: 10px;
   font-family: Red-Hat-Display;
   font-style: normal;
   font-weight: bold;

@@ -6,6 +6,7 @@ import {
   Dimensions,
   ScrollView,
   SafeAreaView,
+  StyleSheet,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {format, parseISO, parse} from 'date-fns';
@@ -186,31 +187,31 @@ export default class Detalhamento extends Component {
             <IconBrasil source={require('../../../assets/iconBrasil.png')} />
           </ViewHeader>
           <MainCard>
-            <ViewGrafico>
-              <TextGrafico>Casos por Região</TextGrafico>
-              <PieChart
-                data={data}
-                width={screenWidth - 40}
-                height={170}
-                chartConfig={chartConfig}
-                accessor="casos"
-                backgroundColor="#ffffff"
-              />
-            </ViewGrafico>
+            {/* <ViewGrafico style={styles.shadow}> */}
+            <TextGrafico>Casos por Região</TextGrafico>
+            <PieChart
+              data={data}
+              width={screenWidth - 40}
+              height={170}
+              chartConfig={chartConfig}
+              accessor="casos"
+              backgroundColor="#faf9fe"
+            />
+            {/* </ViewGrafico> */}
             <ViewTitleRegiao>
               <Circle1 />
               <TitleRegiao>Norte</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Casos</TextTitleCard>
                 <TextNumber>{this.state.norte.suspects}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.norte.cases}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Mortes</TextTitleCard>
                 <TextNumber>{this.state.norte.deaths}</TextNumber>
               </ViewCollumn>
@@ -220,15 +221,15 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Nordeste</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Casos</TextTitleCard>
                 <TextNumber>{this.state.nordeste.suspects}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.nordeste.cases}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Mortes</TextTitleCard>
                 <TextNumber>{this.state.nordeste.deaths}</TextNumber>
               </ViewCollumn>
@@ -238,15 +239,15 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Centro-Oeste</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Casos</TextTitleCard>
                 <TextNumber>{this.state.centroOeste.suspects}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.centroOeste.cases}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Mortes</TextTitleCard>
                 <TextNumber>{this.state.centroOeste.deaths}</TextNumber>
               </ViewCollumn>
@@ -256,15 +257,15 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Sudeste</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Casos</TextTitleCard>
                 <TextNumber>{this.state.sudeste.suspects}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.sudeste.cases}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Mortes</TextTitleCard>
                 <TextNumber>{this.state.sudeste.deaths}</TextNumber>
               </ViewCollumn>
@@ -274,15 +275,15 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Sul</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Casos</TextTitleCard>
                 <TextNumber>{this.state.sul.suspects}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.sul.cases}</TextNumber>
               </ViewCollumn>
-              <ViewCollumn>
+              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Mortes</TextTitleCard>
                 <TextNumber>{this.state.sul.deaths}</TextNumber>
               </ViewCollumn>
@@ -296,3 +297,16 @@ export default class Detalhamento extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: '#4643D3',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.0,
+    elevation: 24,
+  },
+});
