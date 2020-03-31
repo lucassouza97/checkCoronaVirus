@@ -67,7 +67,7 @@ export default class Home extends Component {
       action: true,
 
       items: [
-        //{value: 'BR', label: 'Brasil'},
+        {value: 'BR', label: 'Brasil'},
         {value: 'AC', label: 'Acre'},
         {value: 'AL', label: 'Alagoas'},
         {value: 'AP', label: 'Amapá'},
@@ -142,7 +142,6 @@ export default class Home extends Component {
           return {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
-            suspects: x.suspects + y.suspects,
             datetime: x.datetime,
           };
         });
@@ -166,7 +165,6 @@ export default class Home extends Component {
           return {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
-            suspects: x.suspects + y.suspects,
             datetime: x.datetime,
           }; //casos
         });
@@ -185,7 +183,6 @@ export default class Home extends Component {
           return {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
-            suspects: x.suspects + y.suspects,
             datetime: x.datetime,
           }; //casos
         });
@@ -204,7 +201,6 @@ export default class Home extends Component {
           return {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
-            suspects: x.suspects + y.suspects,
             datetime: x.datetime,
           }; //casos
         });
@@ -218,7 +214,6 @@ export default class Home extends Component {
           return {
             deaths: x.deaths + y.deaths, //mortes
             cases: x.cases + y.cases, //casos confirmados
-            suspects: x.suspects + y.suspects,
             datetime: x.datetime,
           }; //casos
         });
@@ -237,16 +232,13 @@ export default class Home extends Component {
 
   async getCasosEstado(value) {
     if (value === 'BR') {
-      await AsyncStorage.clear();
       this.getCasosPais();
     } else if (value === null) {
       this.setState({action: true});
     } else {
       this.setState({
-        casos: '',
         confirmados: '',
         mortes: '',
-        recuperados: '',
         updated_at: '',
       });
       const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
@@ -255,7 +247,6 @@ export default class Home extends Component {
         .then(r => r.json())
         .then(json => {
           let s = this.state;
-          s.casos = json.suspects;
           s.confirmados = json.cases;
           s.mortes = json.deaths;
           s.updated_at = format(parseISO(json.datetime), "dd 'de' MMMM'", {
@@ -277,7 +268,6 @@ export default class Home extends Component {
 
   getCasosPais() {
     this.setState({
-      casos: '',
       confirmados: '',
       mortes: '',
       updated_at: '',
@@ -287,7 +277,6 @@ export default class Home extends Component {
       .then(r => r.json())
       .then(json => {
         let s = this.state;
-        s.casos = json.data.cases;
         s.confirmados = json.data.confirmed;
         s.mortes = json.data.deaths;
         s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
@@ -397,22 +386,6 @@ export default class Home extends Component {
                   source={require('../../../assets/gif_loading.gif')}
                 />
               </Card2>
-              <Card3
-                style={{
-                  shadowColor: '#4643D3',
-                  shadowOffset: {
-                    width: 0,
-                    height: 12,
-                  },
-                  shadowOpacity: 0.58,
-                  shadowRadius: 16.0,
-                  elevation: 24,
-                }}>
-                <TextViewLoading>Aguardando a seleção...</TextViewLoading>
-                <ImageLoading
-                  source={require('../../../assets/gif_loading.gif')}
-                />
-              </Card3>
             </MainCard>
             <ViewInfo>
               <InfoUpdate>Copyright: Check Corona Virus</InfoUpdate>
@@ -463,28 +436,6 @@ export default class Home extends Component {
             </ViewHeader>
 
             <MainCard>
-              <Card1
-                style={{
-                  shadowColor: '#4643D3',
-                  shadowOffset: {
-                    width: 0,
-                    height: 12,
-                  },
-                  shadowOpacity: 0.58,
-                  shadowRadius: 16.0,
-
-                  elevation: 24,
-                }}>
-                <TextViewCase1>Casos suspeitos</TextViewCase1>
-                <ViewText>
-                  <TextNumberCase>{this.state.casos}</TextNumberCase>
-                </ViewText>
-                <ShowMoreCase1>
-                  <IconCheck
-                    source={require('../../../assets/iconInterrogacao.png')}
-                  />
-                </ShowMoreCase1>
-              </Card1>
               <Card2
                 style={{
                   shadowColor: '#4643D3',

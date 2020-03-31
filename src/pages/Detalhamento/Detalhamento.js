@@ -53,11 +53,11 @@ export default class Detalhamento extends Component {
     this.state = {
       data: [],
       updated_at: '',
-      norte: {cases: 0, datetime: '', deaths: 0, suspects: 0},
-      nordeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
-      centroOeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
-      sudeste: {cases: 0, datetime: '', deaths: 0, suspects: 0},
-      sul: {cases: 0, datetime: '', deaths: 0, suspects: 0},
+      norte: {cases: 0, datetime: '', deaths: 0},
+      nordeste: {cases: 0, datetime: '', deaths: 0},
+      centroOeste: {cases: 0, datetime: '', deaths: 0},
+      sudeste: {cases: 0, datetime: '', deaths: 0},
+      sul: {cases: 0, datetime: '', deaths: 0},
     };
     this.loadStates = this.loadStates.bind(this);
   }
@@ -70,11 +70,7 @@ export default class Detalhamento extends Component {
   loadStates() {
     this.setState({
       casos: '',
-      suspeitos: '',
       mortes: '',
-      recusa: '',
-      estado: '',
-      uf: '',
       updated_at: '',
       newState: '',
     });
@@ -83,11 +79,7 @@ export default class Detalhamento extends Component {
       .then(json => {
         let s = this.state;
         s.casos = json.cases;
-        s.suspeitos = json.suspects;
         s.mortes = json.deaths;
-        s.recusa = json.refuses;
-        s.estado = json.state;
-        s.uf = json.uf;
         s.updated_at = format(
           parseISO(json.datetime),
           "'dia' dd 'de' MMMM', ás' H:mm'h'",
@@ -204,10 +196,6 @@ export default class Detalhamento extends Component {
             </ViewTitleRegiao>
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>{this.state.norte.suspects}</TextNumber>
-              </ViewCollumn>
-              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.norte.cases}</TextNumber>
               </ViewCollumn>
@@ -221,10 +209,6 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Nordeste</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>{this.state.nordeste.suspects}</TextNumber>
-              </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.nordeste.cases}</TextNumber>
@@ -240,10 +224,6 @@ export default class Detalhamento extends Component {
             </ViewTitleRegiao>
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>{this.state.centroOeste.suspects}</TextNumber>
-              </ViewCollumn>
-              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.centroOeste.cases}</TextNumber>
               </ViewCollumn>
@@ -258,10 +238,6 @@ export default class Detalhamento extends Component {
             </ViewTitleRegiao>
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>{this.state.sudeste.suspects}</TextNumber>
-              </ViewCollumn>
-              <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.sudeste.cases}</TextNumber>
               </ViewCollumn>
@@ -275,10 +251,6 @@ export default class Detalhamento extends Component {
               <TitleRegiao>Sul</TitleRegiao>
             </ViewTitleRegiao>
             <ViewDados>
-              <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Casos</TextTitleCard>
-                <TextNumber>{this.state.sul.suspects}</TextNumber>
-              </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumber>{this.state.sul.cases}</TextNumber>

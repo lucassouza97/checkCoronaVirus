@@ -19,6 +19,7 @@ export const ViewInfo = styled.View`
   flex: 1;
   margin-top: 10px;
   margin-bottom: 20px;
+  align-items: center;
 `;
 
 export const ViewText = styled.View`
@@ -92,7 +93,10 @@ export const IconDeaths = styled.Image`
   width: 40px;
   height: 40px;
 `;
-
+export const IconZap = styled.Image`
+  width: 40px;
+  height: 40px;
+`;
 export const InputState = styled.TextInput`
   position: absolute;
   font-size: 15px;
