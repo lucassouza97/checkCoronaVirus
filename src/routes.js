@@ -2,11 +2,12 @@ import * as React from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
 import IconHome from '../assets/icons-menu/Home/Home.png';
 import IconEarth from '../assets/icons-menu/Detalhamento/Detalhamento.png';
+import IconDetalhamento from '../assets/icons-menu/IconDetalhamento/IconDetalhamento.png';
 import IconContato from '../assets/icons-menu/Contato/Contato.png';
 import Home from '../src/pages/Home/Home';
 import Detalhamento from '../src/pages/Detalhamento/Detalhamento';
 import Contato from '../src/pages/Contato/Contato';
-
+import Mundo from '../src/pages/Mundo/Mundo';
 const positionTop = '91.16%';
 const positionBottom = '0.62%';
 
@@ -15,7 +16,8 @@ export default class MyComponent extends React.Component {
     index: 0,
     routes: [
       {key: 'home', icon: IconHome},
-      {key: 'detalhamento', icon: IconEarth},
+      {key: 'detalhamento', icon: IconDetalhamento},
+      {key: 'mundo', icon: IconEarth},
       {key: 'contato', icon: IconContato},
     ],
   };
@@ -25,6 +27,7 @@ export default class MyComponent extends React.Component {
   _renderScene = BottomNavigation.SceneMap({
     home: Home,
     detalhamento: Detalhamento,
+    mundo: Mundo,
     contato: Contato,
   });
 
