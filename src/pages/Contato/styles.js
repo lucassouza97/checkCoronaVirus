@@ -35,7 +35,6 @@ export const LogoImage = styled.Image`
 `;
 
 export const TextCopyrigth = styled.Text`
-  height: 17px;
   top: 68.5%;
   font-family: Montserrat;
   font-style: normal;
@@ -45,7 +44,6 @@ export const TextCopyrigth = styled.Text`
 `;
 
 export const TextInfo = styled.Text`
-  height: 22px;
   top: 30%;
   font-family: Montserrat;
   font-style: normal;
@@ -58,7 +56,6 @@ export const TextInfo = styled.Text`
 `;
 
 export const TextLink = styled.Text`
-  height: 20px;
   top: 32%;
   margin-left: 5.33%;
   font-family: Montserrat;
@@ -72,7 +69,6 @@ export const TextLink = styled.Text`
 `;
 
 export const TextContact = styled.Text`
-  height: 22px;
   top: 30%;
   font-family: Montserrat;
   font-style: normal;
@@ -85,7 +81,6 @@ export const TextContact = styled.Text`
 `;
 
 export const TextContact2 = styled.Text`
-  height: 22px;
   top: 32%;
   font-family: Montserrat;
   margin-left: 5.33%;
@@ -99,7 +94,6 @@ export const TextContact2 = styled.Text`
 `;
 
 export const TextSquad = styled.Text`
-  height: 22px;
   top: 2%;
   font-family: Montserrat;
   font-style: normal;
@@ -112,7 +106,6 @@ export const TextSquad = styled.Text`
 `;
 
 export const TextObs = styled.Text`
-  height: 40px;
   justify-content: flex-start;
   top: 35%;
   margin-left: 5.33%;

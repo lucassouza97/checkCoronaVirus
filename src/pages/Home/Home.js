@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Image,
+  Text,
 } from 'react-native';
 import {format, parseISO} from 'date-fns';
 import RNPickerSelect from 'react-native-picker-select';
@@ -40,6 +41,11 @@ import {
   IconCheck,
   IconConfirmados,
   IconDeaths,
+  ViewCardTitle,
+  ViewTitleEstado,
+  TitleEstado,
+  IconBandeira,
+  ViewBandeira,
 } from './styles';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -240,6 +246,7 @@ export default class Home extends Component {
         confirmados: '',
         mortes: '',
         updated_at: '',
+        state: '',
       });
       const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
 
@@ -253,6 +260,10 @@ export default class Home extends Component {
             locale: pt,
           });
           s.action = false;
+          s.state = json.state;
+
+          s.uf = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${value}.png`;
+
           this.setState(s);
         })
         .catch(error => {
@@ -271,6 +282,8 @@ export default class Home extends Component {
       confirmados: '',
       mortes: '',
       updated_at: '',
+      state: '',
+      uf: '',
     });
 
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
@@ -283,6 +296,9 @@ export default class Home extends Component {
           locale: pt,
         });
         s.action = false;
+        s.state = json.data.country;
+        s.uf =
+          'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
         this.setState(s);
       })
       .catch(error => {
@@ -321,7 +337,7 @@ export default class Home extends Component {
               <LogoTop source={require('../../../assets/Icon.png')} />
               <RNPickerSelect
                 placeholder={{
-                  label: 'Verifique por estado',
+                  label: 'Selecione seu estado',
                   value: null,
                 }}
                 onValueChange={value => this.getCasosEstado(value)}
@@ -402,7 +418,7 @@ export default class Home extends Component {
               <LogoTop source={require('../../../assets/Icon.png')} />
               <RNPickerSelect
                 placeholder={{
-                  label: 'Verifique por estado',
+                  label: 'Selecione o Estado',
                   value: null,
                 }}
                 onValueChange={value => this.getCasosEstado(value)}
@@ -436,6 +452,18 @@ export default class Home extends Component {
             </ViewHeader>
 
             <MainCard>
+              <ViewCardTitle>
+                <TitleEstado>
+                  {this.state.state}
+                  <Text> </Text>
+                </TitleEstado>
+                <IconBandeira
+                  source={{
+                    uri: this.state.uf,
+                  }}
+                />
+              </ViewCardTitle>
+
               <Card2
                 style={{
                   shadowColor: '#4643D3',

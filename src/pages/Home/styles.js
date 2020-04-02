@@ -23,37 +23,37 @@ export const ViewInfo = styled.View`
 `;
 
 export const ViewText = styled.View`
-  top: 12%;
+  top: 10%;
   width: 70%;
   height: 50%;
   flex-direction: row;
 `;
 export const MainCard = styled.View`
-  flex: 5;
+  flex: 2;
   flex-direction: column;
   border-radius: 24px;
   width: ${DEVICE_WIDTH - 60 + 'px'};
 `;
 export const Card1 = styled.View`
-  flex: 2;
+  flex: 1;
   background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card2 = styled.View`
-  flex: 2;
+  flex: 1;
   background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card3 = styled.View`
-  flex: 2;
+  flex: 1;
   background: #ffffff;
   border-radius: 24px;
   margin-bottom: 20px;
 `;
 export const Card4 = styled.View`
-  flex: 2;
+  flex: 1;
   flex-direction: column;
   background: #ffffff;
   border-radius: 24px;
@@ -79,7 +79,7 @@ export const SearchIcon = styled.Image`
   position: absolute;
   left: 88.8%;
   right: 5.33%;
-  top: 31%;
+  top: 18%;
 `;
 export const IconCheck = styled.Image`
   width: 40px;
@@ -97,6 +97,28 @@ export const IconZap = styled.Image`
   width: 40px;
   height: 40px;
 `;
+export const ViewCardTitle = styled.View`
+  flex: 1;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: -30px;
+`;
+export const IconBandeira = styled.Image`
+  width: 70px;
+  height: 50px;
+  margin: auto;
+`;
+export const ViewTitleEstado = styled.View`
+  margin-bottom: 30px;
+  margin-right: 10px;
+  background: red;
+`;
+export const ViewBandeira = styled.View`
+  background: yellow;
+  left: 50px;
+  /* top: calc(50% - 17px/2 - 275.5px); */
+`;
+
 export const InputState = styled.TextInput`
   position: absolute;
   font-size: 15px;
@@ -118,6 +140,15 @@ export const ViewLogo = styled.View`
 
   justify-content: center;
   margin: auto;
+`;
+
+export const TitleEstado = styled.Text`
+  font-family: Montserrat;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: bold;
+  /* identical to box height */
+  color: #000;
 `;
 
 export const TextViewLoading = styled.Text`
@@ -155,9 +186,9 @@ export const TextViewCase1 = styled.Text`
 export const TextNumberCase = styled.Text`
   height: 34px;
   width: auto;
-  left: 68.87%;
+  left: 85%;
   /* mudei e removi o absolute */
-  top: 15px;
+  top: 5px;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
@@ -297,9 +328,9 @@ export const TextViewCase3 = styled.Text`
 export const TextNumberCase3 = styled.Text`
   height: 34px;
   width: auto;
-  left: 68.87%;
+  left: 85%;
   /* mudei e removi o absolute */
-  top: 15px;
+  top: 5px;
   /* top: calc(50% - 34px / 2 - 237px); */
   font-family: Montserrat;
   font-style: normal;
@@ -339,7 +370,7 @@ export const TextViewCase4 = styled.Text`
 
 export const TextNumberCase4 = styled.Text`
   height: 34px;
-  left: 55.87%;
+  left: 85%;
   right: 80.8%;
   width: auto;
   /* top: calc(50% - 34px / 2 + 17px); */

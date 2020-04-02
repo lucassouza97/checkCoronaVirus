@@ -173,11 +173,11 @@ export default class Detalhamento extends Component {
     };
     return (
       <Container>
+        <ViewHeader>
+          <TextHeader>Informações sobre as Regiões do Brasil</TextHeader>
+          <IconBrasil source={require('../../../assets/iconBrasil.png')} />
+        </ViewHeader>
         <ScrollView>
-          <ViewHeader>
-            <TextHeader>Informações sobre as Regiões do Brasil</TextHeader>
-            <IconBrasil source={require('../../../assets/iconBrasil.png')} />
-          </ViewHeader>
           <MainCard>
             {/* <ViewGrafico style={styles.shadow}> */}
             <TextGrafico>Casos por Região</TextGrafico>
