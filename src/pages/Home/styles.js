@@ -186,7 +186,7 @@ export const TextViewCase1 = styled.Text`
 export const TextNumberCase = styled.Text`
   height: 34px;
   width: auto;
-  left: 85%;
+  left: 79%;
   /* mudei e removi o absolute */
   top: 5px;
   /* top: calc(50% - 34px / 2 - 237px); */
@@ -205,7 +205,7 @@ export const ShowMoreCase1 = styled.TouchableOpacity`
   left: 67.87%;
   right: 6.87%;
   /* top: calc(50% - 17px/2 - 275.5px); */
-  top: 30px;
+  top: 25px;
 `;
 
 export const PorcentCaseUp = styled.Text`
@@ -328,7 +328,7 @@ export const TextViewCase3 = styled.Text`
 export const TextNumberCase3 = styled.Text`
   height: 34px;
   width: auto;
-  left: 85%;
+  left: 79%;
   /* mudei e removi o absolute */
   top: 5px;
   /* top: calc(50% - 34px / 2 - 237px); */
@@ -404,4 +404,15 @@ export const InfoUpdate = styled.Text`
   line-height: 17px;
   color: #8c8c96;
   border-radius: 24px;
+`;
+
+export const InfoMortalidade = styled.Text`
+  flex: 1;
+  width: ${DEVICE_WIDTH + 'px'};
+  text-align:center
+  font-family: Montserrat;  
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #000;
 `;

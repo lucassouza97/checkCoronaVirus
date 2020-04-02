@@ -46,6 +46,7 @@ import {
   TitleEstado,
   IconBandeira,
   ViewBandeira,
+  InfoMortalidade,
 } from './styles';
 
 import AsyncStorage from '@react-native-community/async-storage';
@@ -71,6 +72,7 @@ export default class Home extends Component {
       updated_at: '',
       inputValue: '',
       action: true,
+      taxaM: '',
 
       items: [
         {value: 'BR', label: 'Brasil'},
@@ -247,6 +249,7 @@ export default class Home extends Component {
         mortes: '',
         updated_at: '',
         state: '',
+        taxaM: '',
       });
       const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
 
@@ -263,6 +266,9 @@ export default class Home extends Component {
           s.state = json.state;
 
           s.uf = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${value}.png`;
+
+          const taxaM = (Number(json.deaths) / Number(json.cases)) * 100;
+          s.taxaM = taxaM.toFixed(2) + '%';
 
           this.setState(s);
         })
@@ -284,6 +290,7 @@ export default class Home extends Component {
       updated_at: '',
       state: '',
       uf: '',
+      taxaM: '',
     });
 
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
@@ -299,6 +306,9 @@ export default class Home extends Component {
         s.state = json.data.country;
         s.uf =
           'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
+        const taxaM =
+          (Number(json.data.deaths) / Number(json.data.cases)) * 100;
+        s.taxaM = taxaM.toFixed(2) + '%';
         this.setState(s);
       })
       .catch(error => {
@@ -458,9 +468,7 @@ export default class Home extends Component {
                   <Text> </Text>
                 </TitleEstado>
                 <IconBandeira
-                  source={{
-                    uri: this.state.uf,
-                  }}
+                  source={this.state.uf ? {uri: this.state.uf} : null}
                 />
               </ViewCardTitle>
 
@@ -510,6 +518,9 @@ export default class Home extends Component {
               </Card3>
             </MainCard>
             <ViewInfo>
+              <InfoMortalidade>
+                Taxa de mortalidade: {this.state.taxaM}
+              </InfoMortalidade>
               <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
             </ViewInfo>
           </Container>
