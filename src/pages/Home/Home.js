@@ -7,7 +7,11 @@ import {
   View,
   Image,
   Text,
+  Linking,
+  Dimensions,
+  TouchableOpacity,
 } from 'react-native';
+import BoxedShare from './BoxedShare';
 import {format, parseISO} from 'date-fns';
 import RNPickerSelect from 'react-native-picker-select';
 import pt from 'date-fns/locale/pt';
@@ -47,7 +51,13 @@ import {
   IconBandeira,
   ViewBandeira,
   InfoMortalidade,
+  ImageError,
+  ViewError,
+  TextError,
 } from './styles';
+import NetInfo from '@react-native-community/netinfo';
+const screenWidth = Math.round(Dimensions.get('window').width);
+const screenHeight = Math.round(Dimensions.get('window').height);
 
 import AsyncStorage from '@react-native-community/async-storage';
 const DismissKeyboard = ({children}) => (
@@ -73,6 +83,7 @@ export default class Home extends Component {
       inputValue: '',
       action: true,
       taxaM: '',
+      netStatus: 0,
 
       items: [
         {value: 'BR', label: 'Brasil'},
@@ -117,8 +128,12 @@ export default class Home extends Component {
   // lista de casos no brasil por data https://covid19-brazil-api.now.sh/api/report/v1/brazil/api/report/v1/brazil/20200318
 
   componentDidMount() {
-    //this.getCasosRegiao();
     this.getInfoEstadoGeral();
+    const listener = NetInfo.addEventListener(state => {
+      //console.log(state.isConnected);
+      this.setState({netStatus: Number(state.isConnected)});
+      //this.setInfoNet(this.state.netStatus);
+    });
   }
 
   getInfoEstadoGeral() {
@@ -226,12 +241,20 @@ export default class Home extends Component {
           }; //casos
         });
 
+        const totalCasesBrasil = json.data.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //Óbitos
+            cases: x.cases + y.cases, //casos confirmados
+          };
+        });
+
         this.saveDados(
           JSON.stringify(totalNorte),
           JSON.stringify(totalNordeste),
           JSON.stringify(totalSudeste),
           JSON.stringify(totalCentroOeste),
           JSON.stringify(totalSul),
+          JSON.stringify(totalCasesBrasil),
           updated_at,
         );
       })
@@ -306,8 +329,7 @@ export default class Home extends Component {
         s.state = json.data.country;
         s.uf =
           'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
-        const taxaM =
-          (Number(json.data.deaths) / Number(json.data.cases)) * 100;
+        const taxaM = Number(json.data.deaths / json.data.cases) * 100;
         s.taxaM = taxaM.toFixed(2) + '%';
         this.setState(s);
       })
@@ -324,6 +346,7 @@ export default class Home extends Component {
     totalSudeste,
     totalCentroOeste,
     totalSul,
+    totalCasesBrasil,
     updated_at,
   ) {
     try {
@@ -332,12 +355,64 @@ export default class Home extends Component {
       await AsyncStorage.setItem('totalSudeste', totalSudeste);
       await AsyncStorage.setItem('totalCentroOeste', totalCentroOeste);
       await AsyncStorage.setItem('totalSul', totalSul);
+      await AsyncStorage.setItem('totalCasesBrasil', totalCasesBrasil);
       await AsyncStorage.setItem('updated_at', updated_at);
     } catch (error) {
       console.log('Error saving data' + error);
     }
   }
   render() {
+    if (this.state.netStatus == false) {
+      return (
+        <DismissKeyboard>
+          <Container>
+            <StatusBar hidden />
+            <ViewHeader>
+              <LogoTop source={require('../../../assets/Icon.png')} />
+              <RNPickerSelect
+                placeholder={{
+                  label: 'Selecione seu estado',
+                  value: null,
+                }}
+                onValueChange={value => this.getCasosEstado(value)}
+                items={this.state.items}
+                style={{
+                  inputAndroid: {
+                    backgroundColor: 'transparent',
+                    fontSize: 18,
+                    color: 'black',
+                    marginTop: 20,
+                    marginLeft: '25%',
+                    width: 204,
+                    height: 40,
+                    fontFamily: 'Montserrat',
+                    lineHeight: 20,
+                    textAlign: 'right',
+                    fontWeight: '700',
+                  },
+                  placeholder: {
+                    color: 'black',
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                  },
+                }}
+                value={this.state.favSport3}
+                useNativeAndroidPickerStyle={false}
+              />
+
+              <SearchIcon source={require('../../../assets/Searchicon.png')} />
+            </ViewHeader>
+            <ViewError>
+              <ImageError source={require('../../../assets/error1.png')} />
+              <TextError>
+                Ocorreu um erro.{'\n'}
+                Verifique sua conexão e tente novamente.
+              </TextError>
+            </ViewError>
+          </Container>
+        </DismissKeyboard>
+      );
+    }
     if (this.state.action == true) {
       return (
         <DismissKeyboard>
@@ -460,7 +535,6 @@ export default class Home extends Component {
 
               <SearchIcon source={require('../../../assets/Searchicon.png')} />
             </ViewHeader>
-
             <MainCard>
               <ViewCardTitle>
                 <TitleEstado>
@@ -506,7 +580,7 @@ export default class Home extends Component {
 
                   elevation: 24,
                 }}>
-                <TextViewCase3>Mortes</TextViewCase3>
+                <TextViewCase3>Óbitos</TextViewCase3>
                 <ViewText>
                   <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
                 </ViewText>
@@ -521,11 +595,32 @@ export default class Home extends Component {
               <InfoMortalidade>
                 Taxa de mortalidade: {this.state.taxaM}
               </InfoMortalidade>
-              <InfoUpdate>Atualizado em: {this.state.updated_at}</InfoUpdate>
+              <InfoUpdate>Atualizado: {this.state.updated_at}</InfoUpdate>
             </ViewInfo>
+            <View style={styles.ViewStyle}>
+              <BoxedShare
+                WhatsappMessage="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
+                FacebookShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
+                FacebookShareMessage="Hey, I find great react-native component on github"
+                TwitterShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
+                TwitterShareMessage="Hey, I find great react-native component on github"
+                TwitterViaAccount="ugurr_demirel"
+                NativeShareTitle="React Native Social Share Buttons"
+                NativeShareMessage="Hey, I find great react-native component on github"
+                NativeShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
+              />
+            </View>
           </Container>
         </DismissKeyboard>
       );
     }
   }
 }
+const styles = StyleSheet.create({
+  ViewStyle: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: -30,
+  },
+});

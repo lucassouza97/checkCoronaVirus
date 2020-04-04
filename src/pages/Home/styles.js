@@ -17,8 +17,7 @@ export const ViewHeader = styled.View`
 `;
 export const ViewInfo = styled.View`
   flex: 1;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 20px;
   align-items: center;
 `;
 
@@ -149,6 +148,7 @@ export const TitleEstado = styled.Text`
   font-weight: bold;
   /* identical to box height */
   color: #000;
+  margin-bottom: 20px;
 `;
 
 export const TextViewLoading = styled.Text`
@@ -415,4 +415,26 @@ export const InfoMortalidade = styled.Text`
   font-size: 16px;
   line-height: 17px;
   color: #000;
+`;
+
+export const ViewError = styled.View`
+  align-items: center;
+  flex: 3;
+  flex-direction: column;
+  border-radius: 24px;
+  margin-top: 40px;
+`;
+
+export const ImageError = styled.Image`
+  height: 150px;
+  width: 250px;
+`;
+export const TextError = styled.Text`
+  text-align:center
+  font-family: Montserrat;  
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 17px;
+  color: #000;
+  margin-top:10px;
 `;

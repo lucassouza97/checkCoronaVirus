@@ -12,7 +12,7 @@ export const TextHeader = styled.Text`
   font-family: Red-Hat-Display;
   font-style: normal;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 18px;
   color: #000;
 `;
 

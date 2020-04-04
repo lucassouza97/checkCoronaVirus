@@ -58,6 +58,7 @@ export default class Detalhamento extends Component {
       centroOeste: {cases: 0, datetime: '', deaths: 0},
       sudeste: {cases: 0, datetime: '', deaths: 0},
       sul: {cases: 0, datetime: '', deaths: 0},
+      totalB: {cases: 0, deaths: 0},
     };
     this.loadStates = this.loadStates.bind(this);
   }
@@ -70,7 +71,7 @@ export default class Detalhamento extends Component {
   loadStates() {
     this.setState({
       casos: '',
-      mortes: '',
+      Óbitos: '',
       updated_at: '',
       newState: '',
     });
@@ -79,7 +80,7 @@ export default class Detalhamento extends Component {
       .then(json => {
         let s = this.state;
         s.casos = json.cases;
-        s.mortes = json.deaths;
+        s.Óbitos = json.deaths;
         s.updated_at = format(
           parseISO(json.datetime),
           "'dia' dd 'de' MMMM', ás' H:mm'h'",
@@ -110,6 +111,8 @@ export default class Detalhamento extends Component {
       const totalSudeste =
         (await AsyncStorage.getItem('totalSudeste')) || 'none';
       const totalSul = (await AsyncStorage.getItem('totalSul')) || 'none';
+      const totalCasesBrasil =
+        (await AsyncStorage.getItem('totalCasesBrasil')) || 'none';
       const updated_at = (await AsyncStorage.getItem('updated_at')) || 'none';
       this.setState({
         norte: JSON.parse(totalNorte),
@@ -117,6 +120,7 @@ export default class Detalhamento extends Component {
         centroOeste: JSON.parse(totalCentroOeste),
         sudeste: JSON.parse(totalSudeste),
         sul: JSON.parse(totalSul),
+        totalB: JSON.parse(totalCasesBrasil),
         updated_at: updated_at,
       });
     } catch (error) {
@@ -174,10 +178,40 @@ export default class Detalhamento extends Component {
     return (
       <Container>
         <ViewHeader>
-          <TextHeader>Informações sobre as Regiões do Brasil</TextHeader>
+          <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
+            Situação atual do Brasil
+          </Text>
           <IconBrasil source={require('../../../assets/iconBrasil.png')} />
+          <View
+            style={{
+              flexDirection: 'row',
+              margin: 1,
+              justifyContent: 'space-between',
+              marginBottom: 20,
+            }}>
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 18,
+                fontWeight: 'bold',
+                marginRight: 10,
+              }}>
+              Casos: {this.state.totalB.cases}
+            </Text>
+
+            <Text
+              style={{
+                color: 'red',
+                fontSize: 18,
+                fontWeight: 'bold',
+                marginLeft: 10,
+              }}>
+              Óbitos: {this.state.totalB.deaths}
+            </Text>
+          </View>
+          <TextHeader>Informações sobre as Regiões do Brasil</TextHeader>
         </ViewHeader>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <MainCard>
             {/* <ViewGrafico style={styles.shadow}> */}
             <TextGrafico>Casos por Região</TextGrafico>
@@ -200,7 +234,7 @@ export default class Detalhamento extends Component {
                 <TextNumber>{this.state.norte.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Mortes</TextTitleCard>
+                <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumber>{this.state.norte.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
@@ -214,7 +248,7 @@ export default class Detalhamento extends Component {
                 <TextNumber>{this.state.nordeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Mortes</TextTitleCard>
+                <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumber>{this.state.nordeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
@@ -228,7 +262,7 @@ export default class Detalhamento extends Component {
                 <TextNumber>{this.state.centroOeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Mortes</TextTitleCard>
+                <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumber>{this.state.centroOeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
@@ -242,7 +276,7 @@ export default class Detalhamento extends Component {
                 <TextNumber>{this.state.sudeste.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Mortes</TextTitleCard>
+                <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumber>{this.state.sudeste.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>
@@ -256,7 +290,7 @@ export default class Detalhamento extends Component {
                 <TextNumber>{this.state.sul.cases}</TextNumber>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
-                <TextTitleCard>Mortes</TextTitleCard>
+                <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumber>{this.state.sul.deaths}</TextNumber>
               </ViewCollumn>
             </ViewDados>

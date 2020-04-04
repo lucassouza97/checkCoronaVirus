@@ -45,13 +45,12 @@ export default class Mundo extends Component {
 
         const totalCases = json.data.reduce((x, y) => {
           return {
-            deaths: x.deaths + y.deaths, //mortes
+            deaths: x.deaths + y.deaths, //Óbitos
             confirmed: x.confirmed + y.confirmed, //casos confirmados
           };
         });
 
         this.setState({totalCasesWorld: totalCases});
-        console.log(this.state.totalCasesWorld);
 
         this.setState({
           countries: this.getPaginatedArray(this.state.allCountries, 1),
@@ -100,13 +99,14 @@ export default class Mundo extends Component {
       return (
         <Container>
           <ViewHeader>
-            <Text style={{fontSize: 17, color: 'black', fontWeight: 'bold'}}>
+            <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold'}}>
               Situação Mundial
             </Text>
+            <IconMundo source={require('../../../assets/iconMundo.png')} />
             <View
               style={{
                 flexDirection: 'row',
-                margin: 1,
+                margin: 5,
                 justifyContent: 'space-between',
                 marginBottom: 20,
               }}>
@@ -114,7 +114,7 @@ export default class Mundo extends Component {
                 style={{
                   color: 'red',
                   fontSize: 18,
-                  fontWeight: '300',
+                  fontWeight: 'bold',
                   marginRight: 10,
                 }}>
                 Casos: {this.state.totalCasesWorld.confirmed}
@@ -124,14 +124,13 @@ export default class Mundo extends Component {
                 style={{
                   color: 'red',
                   fontSize: 18,
-                  fontWeight: '300',
+                  fontWeight: 'bold',
                   marginLeft: 10,
                 }}>
-                Mortes: {this.state.totalCasesWorld.deaths}
+                Óbitos: {this.state.totalCasesWorld.deaths}
               </Text>
             </View>
             <TextHeader>Países mais afetados</TextHeader>
-            <IconMundo source={require('../../../assets/iconMundo.png')} />
           </ViewHeader>
           <FlatList
             data={this.state.countries}
@@ -149,14 +148,14 @@ class Country extends Component {
   render() {
     const taxaM =
       Number(this.props.data.deaths / this.props.data.confirmed) * 100;
-    const result = taxaM.toFixed(2) + '%';
+    const result = taxaM.toFixed(2) + ' %';
     return (
       <MainCard>
         <ViewTitleCountrie>
           <TitleRegiao>{this.props.data.country}</TitleRegiao>
           <TextMortalidade>Taxa de Mortalidade: {result} </TextMortalidade>
-          <Text style={{fontSize: 10, color: 'grey'}}>
-            Atualizado em:{' '}
+          <Text style={{fontSize: 11, color: 'grey'}}>
+            Atualizado:{' '}
             {format(parseISO(this.props.data.updated_at), "dd 'de' MMMM", {
               locale: pt,
             })}
@@ -168,7 +167,7 @@ class Country extends Component {
             <TextNumber>{this.props.data.confirmed}</TextNumber>
           </ViewCollumn>
           <ViewCollumn style={styles.shadow}>
-            <TextTitleCard>Mortes</TextTitleCard>
+            <TextTitleCard>Óbitos</TextTitleCard>
             <TextNumber>{this.props.data.deaths}</TextNumber>
           </ViewCollumn>
         </ViewDados>

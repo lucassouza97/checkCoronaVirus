@@ -10,8 +10,11 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@mdi/js": "^5.0.45",
+    "@mdi/react": "^1.4.0",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/masked-view": "^0.1.7",
+    "@react-native-community/netinfo": "^5.7.0",
     "@react-navigation/bottom-tabs": "^5.2.4",
     "@react-navigation/material-bottom-tabs": "^5.1.6",
     "@react-navigation/native": "^5.1.3",
