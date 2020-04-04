@@ -12,8 +12,7 @@ export const TextHeader = styled.Text`
   font-family: Red-Hat-Display;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 22px;
   color: #000;
 `;
 
@@ -40,10 +39,10 @@ export const MainCard = styled.View`
 
 export const ViewTitleCountrie = styled.View`
   background: #ffffff;
-  flex-direction: row;
+  flex-direction: column;
   background: transparent;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
 `;
 
@@ -53,6 +52,13 @@ export const TitleRegiao = styled.Text`
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
+  color: #000;
+`;
+
+export const TextMortalidade = styled.Text`
+  font-family: Red-Hat-Display;
+  font-style: normal;
+  font-size: 12px;
   color: #000;
 `;
 

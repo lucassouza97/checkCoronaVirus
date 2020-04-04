@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {format, parseISO} from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import {
   Container,
   TextHeader,
@@ -12,6 +14,7 @@ import {
   ViewCollumn,
   TextTitleCard,
   TextNumber,
+  TextMortalidade,
 } from './styles';
 export default class Mundo extends Component {
   constructor(props) {
@@ -21,6 +24,7 @@ export default class Mundo extends Component {
       allCountries: [],
       loading: true,
       currentPage: 1,
+      totalCasesWorld: [],
     };
   }
 
@@ -31,13 +35,24 @@ export default class Mundo extends Component {
         //give me the result
         this.setState({
           allCountries: json.data.sort((currentElement, nextElement) => {
-            return currentElement.country < nextElement.country
+            return currentElement.confirmed > nextElement.confirmed
               ? -1
-              : currentElement.country > nextElement.country
+              : currentElement.confirmed < nextElement.confirmed
               ? 1
               : 0;
           }),
         });
+
+        const totalCases = json.data.reduce((x, y) => {
+          return {
+            deaths: x.deaths + y.deaths, //mortes
+            confirmed: x.confirmed + y.confirmed, //casos confirmados
+          };
+        });
+
+        this.setState({totalCasesWorld: totalCases});
+        console.log(this.state.totalCasesWorld);
+
         this.setState({
           countries: this.getPaginatedArray(this.state.allCountries, 1),
         });
@@ -45,21 +60,21 @@ export default class Mundo extends Component {
         this.setState({loading: false});
       });
   }
+  //não utilizado no momento
+  // loadMoreCountries() {
+  //   console.log('CURRENT PAGES', this.state.currentPage + 1);
 
-  loadMoreCountries() {
-    console.log('CURRENT PAGES', this.state.currentPage + 1);
-
-    this.setState({
-      countries: [
-        ...this.state.countries,
-        ...this.getPaginatedArray(
-          this.state.allCountries,
-          this.state.currentPage + 1,
-        ),
-      ],
-      currentPage: this.state.currentPage + 1,
-    });
-  }
+  //   this.setState({
+  //     countries: [
+  //       ...this.state.countries,
+  //       ...this.getPaginatedArray(
+  //         this.state.allCountries,
+  //         this.state.currentPage + 1,
+  //       ),
+  //     ],
+  //     currentPage: this.state.currentPage + 1,
+  //   });
+  // }
 
   getCountrybyName(name) {
     return this.state.countries.find(country => country.country === name);
@@ -85,18 +100,44 @@ export default class Mundo extends Component {
       return (
         <Container>
           <ViewHeader>
-            <TextHeader>Informações sobre outros Países</TextHeader>
+            <Text style={{fontSize: 17, color: 'black', fontWeight: 'bold'}}>
+              Situação Mundial
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                margin: 1,
+                justifyContent: 'space-between',
+                marginBottom: 20,
+              }}>
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 18,
+                  fontWeight: '300',
+                  marginRight: 10,
+                }}>
+                Casos: {this.state.totalCasesWorld.confirmed}
+              </Text>
+
+              <Text
+                style={{
+                  color: 'red',
+                  fontSize: 18,
+                  fontWeight: '300',
+                  marginLeft: 10,
+                }}>
+                Mortes: {this.state.totalCasesWorld.deaths}
+              </Text>
+            </View>
+            <TextHeader>Países mais afetados</TextHeader>
             <IconMundo source={require('../../../assets/iconMundo.png')} />
           </ViewHeader>
           <FlatList
             data={this.state.countries}
             renderItem={({item}) => <Country data={item} />}
             keyExtractor={(item, index) => index.toString()}
-            refreshing={refreshing}
-            onEndReachedThreshold={0.2}
-            onEndReached={() => {
-              this.loadMoreCountries();
-            }}
+            showsVerticalScrollIndicator={false}
           />
         </Container>
       );
@@ -106,15 +147,25 @@ export default class Mundo extends Component {
 
 class Country extends Component {
   render() {
+    const taxaM =
+      Number(this.props.data.deaths / this.props.data.confirmed) * 100;
+    const result = taxaM.toFixed(2) + '%';
     return (
       <MainCard>
         <ViewTitleCountrie>
           <TitleRegiao>{this.props.data.country}</TitleRegiao>
+          <TextMortalidade>Taxa de Mortalidade: {result} </TextMortalidade>
+          <Text style={{fontSize: 10, color: 'grey'}}>
+            Atualizado em:{' '}
+            {format(parseISO(this.props.data.updated_at), "dd 'de' MMMM", {
+              locale: pt,
+            })}
+          </Text>
         </ViewTitleCountrie>
         <ViewDados>
           <ViewCollumn style={styles.shadow}>
             <TextTitleCard>Confirmados</TextTitleCard>
-            <TextNumber>{this.props.data.cases}</TextNumber>
+            <TextNumber>{this.props.data.confirmed}</TextNumber>
           </ViewCollumn>
           <ViewCollumn style={styles.shadow}>
             <TextTitleCard>Mortes</TextTitleCard>
