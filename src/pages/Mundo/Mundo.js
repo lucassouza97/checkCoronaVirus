@@ -13,9 +13,16 @@ import {
   ViewDados,
   ViewCollumn,
   TextTitleCard,
-  TextNumber,
+  TextNumberoObitos,
+  TextNumberConfirmados,
   TextMortalidade,
+  TextValueMortalidade,
+  TextValueCasosMundo,
+  TextValueObitosMundo,
+  TextValueMortalidadeMundo,
+  ViewTaxaMortalidadeMundo,
 } from './styles';
+
 export default class Mundo extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +93,12 @@ export default class Mundo extends Component {
 
   render() {
     const {refreshing} = this.state;
-
+    const taxaM =
+      Number(
+        this.state.totalCasesWorld.deaths /
+          this.state.totalCasesWorld.confirmed,
+      ) * 100;
+    const result = taxaM.toFixed(2) + ' %';
     if (this.state.loading) {
       return (
         <Container>
@@ -108,28 +120,49 @@ export default class Mundo extends Component {
                 flexDirection: 'row',
                 margin: 5,
                 justifyContent: 'space-between',
-                marginBottom: 20,
+                margin: 20,
               }}>
               <Text
                 style={{
-                  color: 'red',
-                  fontSize: 18,
+                  color: 'black',
+                  fontSize: 16,
                   fontWeight: 'bold',
                   marginRight: 10,
                 }}>
-                Casos: {this.state.totalCasesWorld.confirmed}
+                Casos:{' '}
+                <TextValueCasosMundo>
+                  {this.state.totalCasesWorld.confirmed
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </TextValueCasosMundo>
               </Text>
 
               <Text
                 style={{
-                  color: 'red',
-                  fontSize: 18,
+                  color: 'black',
+                  fontSize: 16,
                   fontWeight: 'bold',
                   marginLeft: 10,
                 }}>
-                Óbitos: {this.state.totalCasesWorld.deaths}
+                Óbitos:{' '}
+                <TextValueObitosMundo>
+                  {this.state.totalCasesWorld.deaths
+                    .toFixed(2)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </TextValueObitosMundo>
               </Text>
             </View>
+            <ViewTaxaMortalidadeMundo>
+              <Text
+                style={{
+                  color: 'black',
+                  fontSize: 12,
+                  fontWeight: 'bold',
+                }}>
+                Taxa de Mortalidade:{' '}
+                <TextValueMortalidadeMundo>{result}</TextValueMortalidadeMundo>{' '}
+              </Text>
+            </ViewTaxaMortalidadeMundo>
             <TextHeader>Países mais afetados</TextHeader>
           </ViewHeader>
           <FlatList
@@ -153,7 +186,10 @@ class Country extends Component {
       <MainCard>
         <ViewTitleCountrie>
           <TitleRegiao>{this.props.data.country}</TitleRegiao>
-          <TextMortalidade>Taxa de Mortalidade: {result} </TextMortalidade>
+          <TextMortalidade>
+            Taxa de Mortalidade:{' '}
+            <TextValueMortalidade>{result}</TextValueMortalidade>{' '}
+          </TextMortalidade>
           <Text style={{fontSize: 11, color: 'grey'}}>
             Atualizado:{' '}
             {format(parseISO(this.props.data.updated_at), "dd 'de' MMMM", {
@@ -164,11 +200,19 @@ class Country extends Component {
         <ViewDados>
           <ViewCollumn style={styles.shadow}>
             <TextTitleCard>Confirmados</TextTitleCard>
-            <TextNumber>{this.props.data.confirmed}</TextNumber>
+            <TextNumberConfirmados>
+              {this.props.data.confirmed
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            </TextNumberConfirmados>
           </ViewCollumn>
           <ViewCollumn style={styles.shadow}>
             <TextTitleCard>Óbitos</TextTitleCard>
-            <TextNumber>{this.props.data.deaths}</TextNumber>
+            <TextNumberoObitos>
+              {this.props.data.deaths
+                .toFixed(2)
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+            </TextNumberoObitos>
           </ViewCollumn>
         </ViewDados>
       </MainCard>

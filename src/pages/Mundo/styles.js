@@ -9,10 +9,10 @@ export const Container = styled.View`
 `;
 
 export const TextHeader = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   color: #000;
 `;
 
@@ -47,7 +47,7 @@ export const ViewTitleCountrie = styled.View`
 `;
 
 export const TitleRegiao = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -56,7 +56,7 @@ export const TitleRegiao = styled.Text`
 `;
 
 export const TextMortalidade = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-size: 12px;
   color: #000;
@@ -88,7 +88,7 @@ export const ViewCollumn = styled.View`
 `;
 
 export const TextTitleCard = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-size: 14px;
   color: #000;
@@ -96,15 +96,79 @@ export const TextTitleCard = styled.Text`
   align-items: center;
 `;
 
-export const TextNumber = styled.Text`
-  font-family: Red-Hat-Display;
+export const TextValueObitosMundo = styled.Text`
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 20px;
+  color: #fab822;
+  margin-top: 10px;
+  align-items: center;
+  flex-direction: column;
+`;
+export const TextValueCasosMundo = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #4643d3;
+  margin-top: 10px;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const TextNumberConfirmados = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #4643d3;
+  margin-top: 10px;
+  align-items: center;
+  flex-direction: column;
+`;
+export const TextNumberoObitos = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  color: #fab822;
+  margin-top: 10px;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const TextValueMortalidade = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fb397a;
+`;
+
+export const ViewTaxaMortalidadeMundo = styled.View`
+  margin-top: -10px;
+  margin-bottom: 10px;
+`;
+
+export const TextMortalidadeMundo = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-size: 16px;
   color: #000;
   margin-top: 10px;
   align-items: center;
   flex-direction: column;
+`;
+
+export const TextValueMortalidadeMundo = styled.Text`
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  color: #fb397a;
 `;
 
 export const Countries = styled.FlatList`

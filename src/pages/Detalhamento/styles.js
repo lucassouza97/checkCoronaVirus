@@ -48,7 +48,7 @@ export const StateText = styled.Text`
   left: ${DEVICE_WIDTH - 120};
   top: 12%;
   bottom: 95.88%;
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -60,7 +60,7 @@ export const TextTotal = styled.Text`
   height: 20px;
   left: ${DEVICE_WIDTH - 390};
   top: 78px;
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -96,7 +96,7 @@ export const ViewDados = styled.View`
 `;
 export const TextGrafico = styled.Text`
   margin: 10px;
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -124,7 +124,7 @@ export const ViewTitleRegiao = styled.View`
   margin-top: 10px;
 `;
 export const TitleRegiao = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -132,7 +132,7 @@ export const TitleRegiao = styled.Text`
   color: #000;
 `;
 export const TextHeader = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
@@ -140,7 +140,7 @@ export const TextHeader = styled.Text`
   color: #000;
 `;
 export const TextTitleCard = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-size: 14px;
   color: #000;
@@ -148,7 +148,7 @@ export const TextTitleCard = styled.Text`
   align-items: center;
 `;
 export const TextNumber = styled.Text`
-  font-family: Red-Hat-Display;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
   font-size: 28px;

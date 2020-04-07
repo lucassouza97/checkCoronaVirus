@@ -54,6 +54,7 @@ import {
   ImageError,
   ViewError,
   TextError,
+  InfoMortalidadeValor,
 } from './styles';
 import NetInfo from '@react-native-community/netinfo';
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -321,7 +322,9 @@ export default class Home extends Component {
       .then(json => {
         let s = this.state;
         s.confirmados = json.data.confirmed;
-        s.mortes = json.data.deaths;
+        s.mortes = json.data.deaths
+          .toFixed(1)
+          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
         s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
           locale: pt,
         });
@@ -385,7 +388,7 @@ export default class Home extends Component {
                     marginLeft: '25%',
                     width: 204,
                     height: 40,
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'VarelaRound-Regular',
                     lineHeight: 20,
                     textAlign: 'right',
                     fontWeight: '700',
@@ -436,7 +439,7 @@ export default class Home extends Component {
                     marginLeft: '25%',
                     width: 204,
                     height: 40,
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'VarelaRound-Regular',
                     lineHeight: 20,
                     textAlign: 'right',
                     fontWeight: '700',
@@ -517,7 +520,7 @@ export default class Home extends Component {
                     marginLeft: '25%',
                     width: 204,
                     height: 45,
-                    fontFamily: 'Montserrat',
+                    fontFamily: 'VarelaRound-Regular',
                     lineHeight: 20,
                     textAlign: 'right',
                     fontWeight: '700',
@@ -537,10 +540,6 @@ export default class Home extends Component {
             </ViewHeader>
             <MainCard>
               <ViewCardTitle>
-                <TitleEstado>
-                  {this.state.state}
-                  <Text> </Text>
-                </TitleEstado>
                 <IconBandeira
                   source={this.state.uf ? {uri: this.state.uf} : null}
                 />
@@ -562,11 +561,6 @@ export default class Home extends Component {
                 <ViewText>
                   <TextNumberCase>{this.state.confirmados}</TextNumberCase>
                 </ViewText>
-                <ShowMoreCase1>
-                  <IconConfirmados
-                    source={require('../../../assets/iconDeaths.png')}
-                  />
-                </ShowMoreCase1>
               </Card2>
               <Card3
                 style={{
@@ -584,16 +578,12 @@ export default class Home extends Component {
                 <ViewText>
                   <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
                 </ViewText>
-                <ShowMoreCase1>
-                  <IconDeaths
-                    source={require('../../../assets/iconMorte.png')}
-                  />
-                </ShowMoreCase1>
               </Card3>
             </MainCard>
             <ViewInfo>
               <InfoMortalidade>
-                Taxa de mortalidade: {this.state.taxaM}
+                Taxa de mortalidade:{' '}
+                <InfoMortalidadeValor>{this.state.taxaM}</InfoMortalidadeValor>
               </InfoMortalidade>
               <InfoUpdate>Atualizado: {this.state.updated_at}</InfoUpdate>
             </ViewInfo>

@@ -75,15 +75,12 @@ export default class Contato extends Component {
             }>
             - Lucas Souza
           </TextIntegrants>
-          <TextSupport>Apoio:</TextSupport>
-          <TextSupport2
+          <TextIntegrants
             onPress={() =>
-              Linking.openURL(
-                'https://www.linkedin.com/in/jonas-emanuel-076960b0/',
-              )
+              Linking.openURL('https://www.linkedin.com/in/lucasouzasilva/')
             }>
-            - Jonas Emanuel (Developer)
-          </TextSupport2>
+            - Jonas Emanuel
+          </TextIntegrants>
         </ViewInfo>
 
         <ViewCopyrigth>
@@ -96,7 +93,7 @@ export default class Contato extends Component {
               )
             }>
             {' '}
-            v1.0{' '}
+            v1.2{' '}
           </Text>
         </ViewCopyrigth>
       </Container>

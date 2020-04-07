@@ -14,24 +14,23 @@ export const ViewHeader = styled.View`
   width: ${DEVICE_WIDTH}px;
   background-color: transparent;
   justify-content: space-between;
+  margin-bottom: 50px;
 `;
 export const ViewInfo = styled.View`
   flex: 1;
   margin-top: 20px;
   align-items: center;
 `;
-
 export const ViewText = styled.View`
-  top: 10%;
-  width: 70%;
-  height: 50%;
+  width: auto;
+  height: auto;
   flex-direction: row;
 `;
 export const MainCard = styled.View`
   flex: 2;
   flex-direction: column;
   border-radius: 24px;
-  width: ${DEVICE_WIDTH - 60 + 'px'};
+  width: ${DEVICE_WIDTH - 150 + 'px'};
 `;
 export const Card1 = styled.View`
   flex: 1;
@@ -81,20 +80,16 @@ export const SearchIcon = styled.Image`
   top: 18%;
 `;
 export const IconCheck = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `;
 export const IconConfirmados = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `;
 export const IconDeaths = styled.Image`
-  width: 40px;
-  height: 40px;
-`;
-export const IconZap = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
 `;
 export const ViewCardTitle = styled.View`
   flex: 1;
@@ -103,8 +98,8 @@ export const ViewCardTitle = styled.View`
   margin-top: -30px;
 `;
 export const IconBandeira = styled.Image`
-  width: 70px;
-  height: 50px;
+  width: 50px;
+  height: 40px;
   margin: auto;
 `;
 export const ViewTitleEstado = styled.View`
@@ -126,7 +121,7 @@ export const InputState = styled.TextInput`
   height: 40px;
   left: 150px;
   top: 25px;
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 17px;
@@ -142,9 +137,9 @@ export const ViewLogo = styled.View`
 `;
 
 export const TitleEstado = styled.Text`
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   /* identical to box height */
   color: #000;
@@ -156,7 +151,7 @@ export const TextViewLoading = styled.Text`
   text-align: center;
   top: 70%;
   /* top: calc(50% - 34px / 2 - 237px); */
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -173,7 +168,7 @@ export const TextViewCase1 = styled.Text`
   right: 40%;
   top: 15px;
   /* top: calc(50% - 34px / 2 - 237px); */
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 800;
   font-size: 16px;
@@ -184,19 +179,19 @@ export const TextViewCase1 = styled.Text`
 `;
 
 export const TextNumberCase = styled.Text`
-  height: 34px;
+  height: auto;
   width: auto;
-  left: 79%;
-  /* mudei e removi o absolute */
-  top: 5px;
-  /* top: calc(50% - 34px / 2 - 237px); */
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
-  font-size: 28px;
-  line-height: 34px;
+  font-size: 16px;
   letter-spacing: 0.25px;
-  color: #000;
+  margin: auto;
+  text-align: center;
+  letter-spacing: 0.25px;
+  font-weight: bold;
+  font-size: 28px;
+  color: #4643d3;
 `;
 
 export const ShowMoreCase1 = styled.TouchableOpacity`
@@ -214,7 +209,7 @@ export const PorcentCaseUp = styled.Text`
   right: 23.73%;
   /* top: calc(50% - 20px/2 - 234px); */
   top: 20px;
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -230,7 +225,7 @@ export const PorcentCaseDown = styled.Text`
   right: 23.73%;
   /* top: calc(50% - 20px/2 - 234px); */
   top: 20px;
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -253,7 +248,7 @@ export const ImageDown1 = styled.Image`
   bottom: 76.64%;
 `;
 export const ShowMoreTextCase = styled.Text`
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -264,6 +259,19 @@ export const ShowMoreTextCase = styled.Text`
 `;
 
 export const TextViewCase2 = styled.Text`
+  height: auto;
+  width: auto;
+  font-family: VarelaRound-Regular;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.25px;
+  margin: auto;
+  text-align: center;
+  color: #000;
+`;
+
+export const TextNumberCase2 = styled.Text`
   position: absolute;
   height: 20px;
   left: 10%;
@@ -271,30 +279,14 @@ export const TextViewCase2 = styled.Text`
   /* top: calc(50% - 20px / 2 - 149px); */
   top: 60px;
   top: 15px;
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
   /* identical to box height */
   letter-spacing: 0.25px;
-  color: #000;
-`;
-
-export const TextNumberCase2 = styled.Text`
-  height: 34px;
-  width: auto;
-  left: 55.87%;
-  /* mudei e removi o absolute */
-  top: 10px;
-  /* top: calc(50% - 34px/2 - 110px); */
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 28px;
-  line-height: 34px;
-  letter-spacing: 0.25px;
-  color: #000;
+  color: #4643d3;
 `;
 
 export const ShowMoreCase2 = styled.TouchableOpacity`
@@ -307,38 +299,32 @@ export const ShowMoreCase2 = styled.TouchableOpacity`
 `;
 
 export const TextViewCase3 = styled.Text`
-  position: absolute;
-  height: 20px;
-  width: 25%;
-  left: 10%;
-  right: 40%;
-  /* top: calc(50% - 20px / 2 - 22px); */
-  top: 15px;
-  font-family: Montserrat;
+  height: auto;
+  width: auto;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-
-  line-height: 20px;
-  /* identical to box height */
   letter-spacing: 0.25px;
+  margin: auto;
+  text-align: center;
   color: #000;
 `;
 
 export const TextNumberCase3 = styled.Text`
-  height: 34px;
+  height: auto;
   width: auto;
-  left: 79%;
-  /* mudei e removi o absolute */
-  top: 5px;
-  /* top: calc(50% - 34px / 2 - 237px); */
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
-  font-size: 28px;
-  line-height: 34px;
+  font-size: 16px;
   letter-spacing: 0.25px;
-  color: #000;
+  margin: auto;
+  text-align: center;
+  letter-spacing: 0.25px;
+  font-weight: bold;
+  font-size: 28px;
+  color: #fab822;
 `;
 
 export const ShowMoreCase3 = styled.TouchableOpacity`
@@ -358,7 +344,7 @@ export const TextViewCase4 = styled.Text`
   right: 50.4%;
   top: 15px;
   /* top: calc(50% - 34px / 2 - 237px); */
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
@@ -375,7 +361,7 @@ export const TextNumberCase4 = styled.Text`
   width: auto;
   /* top: calc(50% - 34px / 2 + 17px); */
   top: 10px;
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: 600;
   font-size: 28px;
@@ -397,7 +383,7 @@ export const InfoUpdate = styled.Text`
   flex: 1;
   width: ${DEVICE_WIDTH + 'px'};
   text-align:center
-  font-family: Montserrat;
+  font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -410,11 +396,20 @@ export const InfoMortalidade = styled.Text`
   flex: 1;
   width: ${DEVICE_WIDTH + 'px'};
   text-align:center
-  font-family: Montserrat;  
+  font-family: VarelaRound-Regular;  
   font-weight: bold;
   font-size: 16px;
   line-height: 17px;
   color: #000;
+`;
+export const InfoMortalidadeValor = styled.Text`
+  width: ${DEVICE_WIDTH + 'px'};
+  text-align:center
+  font-family: VarelaRound-Regular;  
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 17px;
+  color: #fb397a;
 `;
 
 export const ViewError = styled.View`
@@ -431,7 +426,7 @@ export const ImageError = styled.Image`
 `;
 export const TextError = styled.Text`
   text-align:center
-  font-family: Montserrat;  
+  font-family: VarelaRound-Regular;  
   font-weight: bold;
   font-size: 15px;
   line-height: 17px;

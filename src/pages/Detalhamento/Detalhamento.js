@@ -20,6 +20,16 @@ import {
   StackedBarChart,
 } from 'react-native-chart-kit';
 import {
+  TextNumberConfirmados,
+  TextNumberoObitos,
+  TextMortalidade,
+  TextValueMortalidade,
+  TextValueCasosMundo,
+  TextValueObitosMundo,
+  ViewTaxaMortalidadeMundo,
+  TextValueMortalidadeMundo,
+} from '../Mundo/styles';
+import {
   Container,
   ImageBackground,
   BackButton,
@@ -128,6 +138,9 @@ export default class Detalhamento extends Component {
     }
   }
   render() {
+    const taxaM =
+      Number(this.state.totalB.deaths / this.state.totalB.cases) * 100;
+    const result = taxaM.toFixed(2) + ' %';
     const data = [
       {
         name: 'Norte',
@@ -185,30 +198,51 @@ export default class Detalhamento extends Component {
           <View
             style={{
               flexDirection: 'row',
-              margin: 1,
+              margin: 5,
               justifyContent: 'space-between',
-              marginBottom: 20,
+              margin: 20,
             }}>
             <Text
               style={{
-                color: 'red',
-                fontSize: 18,
+                color: 'black',
+                fontSize: 16,
                 fontWeight: 'bold',
                 marginRight: 10,
               }}>
-              Casos: {this.state.totalB.cases}
+              Casos:{' '}
+              <TextValueCasosMundo>
+                {this.state.totalB.cases
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+              </TextValueCasosMundo>
             </Text>
 
             <Text
               style={{
-                color: 'red',
-                fontSize: 18,
+                color: 'black',
+                fontSize: 16,
                 fontWeight: 'bold',
                 marginLeft: 10,
               }}>
-              Óbitos: {this.state.totalB.deaths}
+              Óbitos:{' '}
+              <TextValueObitosMundo>
+                {this.state.totalB.deaths
+                  .toFixed(2)
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+              </TextValueObitosMundo>
             </Text>
           </View>
+          <ViewTaxaMortalidadeMundo>
+            <Text
+              style={{
+                color: 'black',
+                fontSize: 12,
+                fontWeight: 'bold',
+              }}>
+              Taxa de Mortalidade:{' '}
+              <TextValueMortalidadeMundo>{result}</TextValueMortalidadeMundo>{' '}
+            </Text>
+          </ViewTaxaMortalidadeMundo>
           <TextHeader>Informações sobre as Regiões do Brasil</TextHeader>
         </ViewHeader>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -231,11 +265,13 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.norte.cases}</TextNumber>
+                <TextNumberConfirmados>
+                  {this.state.norte.cases}
+                </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumber>{this.state.norte.deaths}</TextNumber>
+                <TextNumberoObitos>{this.state.norte.deaths}</TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -245,11 +281,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.nordeste.cases}</TextNumber>
+                <TextNumberConfirmados>
+                  {this.state.nordeste.cases}
+                </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumber>{this.state.nordeste.deaths}</TextNumber>
+                <TextNumberoObitos>
+                  {this.state.nordeste.deaths}
+                </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -259,11 +299,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.centroOeste.cases}</TextNumber>
+                <TextNumberConfirmados>
+                  {this.state.centroOeste.cases}
+                </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumber>{this.state.centroOeste.deaths}</TextNumber>
+                <TextNumberoObitos>
+                  {this.state.centroOeste.deaths}
+                </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -273,11 +317,15 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.sudeste.cases}</TextNumber>
+                <TextNumberConfirmados>
+                  {this.state.sudeste.cases}
+                </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumber>{this.state.sudeste.deaths}</TextNumber>
+                <TextNumberoObitos>
+                  {this.state.sudeste.deaths}
+                </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -287,11 +335,13 @@ export default class Detalhamento extends Component {
             <ViewDados>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
-                <TextNumber>{this.state.sul.cases}</TextNumber>
+                <TextNumberConfirmados>
+                  {this.state.sul.cases}
+                </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumber>{this.state.sul.deaths}</TextNumber>
+                <TextNumberoObitos>{this.state.sul.deaths}</TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
           </MainCard>
