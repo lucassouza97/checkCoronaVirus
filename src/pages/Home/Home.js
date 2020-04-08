@@ -365,6 +365,14 @@ export default class Home extends Component {
     }
   }
   render() {
+    const message = `Corona Virus Report: Neste momento o estado de/do *${
+      this.state.state
+    }* possui *${this.state.confirmados}* casos confirmado(s) e *${
+      this.state.mortes
+    }* óbito(s). ${'\n'}Informações atualizadas em *${
+      this.state.updated_at
+    }*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
+
     if (this.state.netStatus == false) {
       return (
         <DismissKeyboard>
@@ -591,12 +599,12 @@ export default class Home extends Component {
               <BoxedShare
                 WhatsappMessage="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
                 FacebookShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                FacebookShareMessage="Hey, I find great react-native component on github"
+                FacebookShareMessage={message}
                 TwitterShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                TwitterShareMessage="Hey, I find great react-native component on github"
+                TwitterShareMessage={message}
                 TwitterViaAccount="ugurr_demirel"
                 NativeShareTitle="React Native Social Share Buttons"
-                NativeShareMessage="Hey, I find great react-native component on github"
+                NativeShareMessage={message}
                 NativeShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
               />
             </View>
