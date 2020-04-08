@@ -288,6 +288,7 @@ export default class Home extends Component {
           });
           s.action = false;
           s.state = json.state;
+          s.sigla = json.uf;
 
           s.uf = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${value}.png`;
 
@@ -365,9 +366,11 @@ export default class Home extends Component {
     }
   }
   render() {
-    const message = `Corona Virus Report: Neste momento o estado de/do *${
-      this.state.state
-    }* possui *${this.state.confirmados}* casos confirmado(s) e *${
+    const message = `Corona Virus Report: Neste momento o estado ${
+      this.state.sigla
+    } *(${this.state.state})* possui *${
+      this.state.confirmados
+    }* casos confirmado(s) e *${
       this.state.mortes
     }* óbito(s). ${'\n'}Informações atualizadas em *${
       this.state.updated_at
