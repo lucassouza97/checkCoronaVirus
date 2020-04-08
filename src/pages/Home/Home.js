@@ -85,7 +85,8 @@ export default class Home extends Component {
       action: true,
       taxaM: '',
       netStatus: 0,
-
+      sigla: '',
+      message: '',
       items: [
         {value: 'BR', label: 'Brasil'},
         {value: 'AC', label: 'Acre'},
@@ -289,11 +290,24 @@ export default class Home extends Component {
           s.action = false;
           s.state = json.state;
           s.sigla = json.uf;
-
           s.uf = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${value}.png`;
 
           const taxaM = (Number(json.deaths) / Number(json.cases)) * 100;
           s.taxaM = taxaM.toFixed(2) + '%';
+          
+          const data = format(parseISO(json.datetime), "dd 'de' MMMM'", {
+            locale: pt,
+          });
+
+          s.message = `Corona Virus Report: Neste momento o estado ${
+            json.uf
+          } *(${json.state})* possui *${
+            json.cases
+          }* casos confirmado(s) e *${
+            json.deaths
+          }* óbito(s). ${'\n'}Informações atualizadas em *${
+            data
+          }*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
 
           this.setState(s);
         })
@@ -331,10 +345,21 @@ export default class Home extends Component {
         });
         s.action = false;
         s.state = json.data.country;
-        s.uf =
-          'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
+        s.uf ='https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
         const taxaM = Number(json.data.deaths / json.data.cases) * 100;
         s.taxaM = taxaM.toFixed(2) + '%';
+        const data = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
+          locale: pt,
+        });
+
+        s.message = `Corona Virus Report: Neste momento o *(Brasil)* possui *${
+          json.data.confirmed
+        }* casos confirmado(s) e *${
+          json.data.deaths
+        }* óbito(s). ${'\n'}Informações atualizadas em *${
+          data
+        }*.${'\n'}Dados extraíos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
+        
         this.setState(s);
       })
       .catch(error => {
@@ -366,16 +391,6 @@ export default class Home extends Component {
     }
   }
   render() {
-    const message = `Corona Virus Report: Neste momento o estado ${
-      this.state.sigla
-    } *(${this.state.state})* possui *${
-      this.state.confirmados
-    }* casos confirmado(s) e *${
-      this.state.mortes
-    }* óbito(s). ${'\n'}Informações atualizadas em *${
-      this.state.updated_at
-    }*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
-
     if (this.state.netStatus == false) {
       return (
         <DismissKeyboard>
@@ -602,12 +617,12 @@ export default class Home extends Component {
               <BoxedShare
                 WhatsappMessage="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
                 FacebookShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                FacebookShareMessage={message}
+                FacebookShareMessage={this.state.message}
                 TwitterShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                TwitterShareMessage={message}
+                TwitterShareMessage={this.state.message}
                 TwitterViaAccount="ugurr_demirel"
                 NativeShareTitle="React Native Social Share Buttons"
-                NativeShareMessage={message}
+                NativeShareMessage={this.state.message}
                 NativeShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
               />
             </View>

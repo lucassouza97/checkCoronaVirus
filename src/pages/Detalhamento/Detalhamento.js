@@ -205,8 +205,7 @@ export default class Detalhamento extends Component {
             <Text
               style={{
                 color: 'black',
-                fontSize: 16,
-                fontWeight: 'bold',
+                fontSize: 14,                
                 marginRight: 10,
               }}>
               Casos:{' '}
@@ -220,8 +219,7 @@ export default class Detalhamento extends Component {
             <Text
               style={{
                 color: 'black',
-                fontSize: 16,
-                fontWeight: 'bold',
+                fontSize: 14,                
                 marginLeft: 10,
               }}>
               Óbitos:{' '}
@@ -236,8 +234,7 @@ export default class Detalhamento extends Component {
             <Text
               style={{
                 color: 'black',
-                fontSize: 12,
-                fontWeight: 'bold',
+                fontSize: 12,                
               }}>
               Taxa de Mortalidade:{' '}
               <TextValueMortalidadeMundo>{result}</TextValueMortalidadeMundo>{' '}
