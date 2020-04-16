@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
 import {format, parseISO} from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import NetInfo from '@react-native-community/netinfo';
 import {
   Container,
   TextHeader,
@@ -23,6 +24,8 @@ import {
   ViewTaxaMortalidadeMundo,
 } from './styles';
 
+import {ImageError, TextError} from '../Home/styles';
+
 export default class Mundo extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +35,17 @@ export default class Mundo extends Component {
       loading: true,
       currentPage: 1,
       totalCasesWorld: [],
+      netStatus: 0,
     };
   }
 
   componentDidMount() {
+    const listener = NetInfo.addEventListener(state => {
+      //console.log(state.isConnected);
+      this.setState({netStatus: Number(state.isConnected)});
+      //this.setInfoNet(this.state.netStatus);
+    });
+
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/countries') //get data
       .then(r => r.json()) //transform in json
       .then(json => {
@@ -64,23 +74,14 @@ export default class Mundo extends Component {
         });
 
         this.setState({loading: false});
+      })
+      .catch(error => {
+        this.setState({
+          netStatus: false,
+          loading: false,
+        });
       });
   }
-  //não utilizado no momento
-  // loadMoreCountries() {
-  //   console.log('CURRENT PAGES', this.state.currentPage + 1);
-
-  //   this.setState({
-  //     countries: [
-  //       ...this.state.countries,
-  //       ...this.getPaginatedArray(
-  //         this.state.allCountries,
-  //         this.state.currentPage + 1,
-  //       ),
-  //     ],
-  //     currentPage: this.state.currentPage + 1,
-  //   });
-  // }
 
   getCountrybyName(name) {
     return this.state.countries.find(country => country.country === name);
@@ -99,6 +100,20 @@ export default class Mundo extends Component {
           this.state.totalCasesWorld.confirmed,
       ) * 100;
     const result = taxaM.toFixed(2) + ' %';
+    if (this.state.netStatus == false) {
+      return (
+        <Container>
+          <View style={[styles.container, styles.loading]}>
+            <ImageError source={require('../../../assets/error1.png')} />
+            <TextError>
+              Ocorreu um erro.{'\n'}
+              Verifique sua conexão e tente novamente.
+            </TextError>
+          </View>
+        </Container>
+      );
+    }
+
     if (this.state.loading) {
       return (
         <Container>
@@ -125,14 +140,13 @@ export default class Mundo extends Component {
               <Text
                 style={{
                   color: 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
+                  fontSize: 14,
                   marginRight: 10,
                 }}>
                 Casos:{' '}
                 <TextValueCasosMundo>
                   {this.state.totalCasesWorld.confirmed
-                    .toFixed(2)
+                    .toFixed(0)
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextValueCasosMundo>
               </Text>
@@ -140,14 +154,13 @@ export default class Mundo extends Component {
               <Text
                 style={{
                   color: 'black',
-                  fontSize: 16,
-                  fontWeight: 'bold',
+                  fontSize: 14,
                   marginLeft: 10,
                 }}>
                 Óbitos:{' '}
                 <TextValueObitosMundo>
                   {this.state.totalCasesWorld.deaths
-                    .toFixed(2)
+                    .toFixed(0)
                     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextValueObitosMundo>
               </Text>
@@ -157,7 +170,6 @@ export default class Mundo extends Component {
                 style={{
                   color: 'black',
                   fontSize: 12,
-                  fontWeight: 'bold',
                 }}>
                 Taxa de Mortalidade:{' '}
                 <TextValueMortalidadeMundo>{result}</TextValueMortalidadeMundo>{' '}
@@ -202,7 +214,7 @@ class Country extends Component {
             <TextTitleCard>Confirmados</TextTitleCard>
             <TextNumberConfirmados>
               {this.props.data.confirmed
-                .toFixed(2)
+                .toFixed(0)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             </TextNumberConfirmados>
           </ViewCollumn>
@@ -210,7 +222,7 @@ class Country extends Component {
             <TextTitleCard>Óbitos</TextTitleCard>
             <TextNumberoObitos>
               {this.props.data.deaths
-                .toFixed(2)
+                .toFixed(0)
                 .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
             </TextNumberoObitos>
           </ViewCollumn>

@@ -85,7 +85,9 @@ export default class Home extends Component {
       action: true,
       taxaM: '',
       netStatus: 0,
-
+      loading: false,
+      sigla: '',
+      message: '',
       items: [
         {value: 'BR', label: 'Brasil'},
         {value: 'AC', label: 'Acre'},
@@ -259,7 +261,9 @@ export default class Home extends Component {
           updated_at,
         );
       })
-      .catch(error => {});
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   async getCasosEstado(value) {
@@ -274,6 +278,7 @@ export default class Home extends Component {
         updated_at: '',
         state: '',
         taxaM: '',
+        loading: true,
       });
       const url = `https://covid19-brazil-api.now.sh/api/report/v1/brazil/uf/${value}`;
 
@@ -289,17 +294,35 @@ export default class Home extends Component {
           s.action = false;
           s.state = json.state;
           s.sigla = json.uf;
-
+          s.loading = false;
           s.uf = `https://devarthurribeiro.github.io/covid19-brazil-api/static/flags/${value}.png`;
 
           const taxaM = (Number(json.deaths) / Number(json.cases)) * 100;
           s.taxaM = taxaM.toFixed(2) + '%';
 
+          const data = format(parseISO(json.datetime), "dd 'de' MMMM'", {
+            locale: pt,
+          });
+
+          s.message = `Corona Virus Report: Neste momento o estado ${
+            json.uf
+          } *(${json.state})* possui *${json.cases
+            .toFixed(0)
+            .replace(
+              /(\d)(?=(\d{3})+(?!\d))/g,
+              '$1,',
+            )}* casos confirmado(s) e *${json.deaths
+            .toFixed(0)
+            .replace(
+              /(\d)(?=(\d{3})+(?!\d))/g,
+              '$1,',
+            )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
+
           this.setState(s);
         })
         .catch(error => {
           this.setState({
-            error: true,
+            netStatus: false,
             loading: false,
           });
         });
@@ -316,6 +339,7 @@ export default class Home extends Component {
       state: '',
       uf: '',
       taxaM: '',
+      loading: true,
     });
 
     fetch('https://covid19-brazil-api.now.sh/api/report/v1/brazil')
@@ -323,23 +347,38 @@ export default class Home extends Component {
       .then(json => {
         let s = this.state;
         s.confirmados = json.data.confirmed;
-        s.mortes = json.data.deaths
-          .toFixed(1)
-          .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        s.mortes = json.data.deaths;
         s.updated_at = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
           locale: pt,
         });
         s.action = false;
+        s.loading = false;
         s.state = json.data.country;
         s.uf =
           'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
         const taxaM = Number(json.data.deaths / json.data.cases) * 100;
         s.taxaM = taxaM.toFixed(2) + '%';
+        const data = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
+          locale: pt,
+        });
+
+        s.message = `Corona Virus Report: Neste momento o *(Brasil)* possui *${json.data.confirmed
+          .toFixed(0)
+          .replace(
+            /(\d)(?=(\d{3})+(?!\d))/g,
+            '$1,',
+          )}* casos confirmado(s) e *${json.data.deaths
+          .toFixed(0)
+          .replace(
+            /(\d)(?=(\d{3})+(?!\d))/g,
+            '$1,',
+          )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraíos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
+
         this.setState(s);
       })
       .catch(error => {
         this.setState({
-          error: true,
+          netStatus: false,
           loading: false,
         });
       });
@@ -366,16 +405,6 @@ export default class Home extends Component {
     }
   }
   render() {
-    const message = `Corona Virus Report: Neste momento o estado ${
-      this.state.sigla
-    } *(${this.state.state})* possui *${
-      this.state.confirmados
-    }* casos confirmado(s) e *${
-      this.state.mortes
-    }* óbito(s). ${'\n'}Informações atualizadas em *${
-      this.state.updated_at
-    }*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
-
     if (this.state.netStatus == false) {
       return (
         <DismissKeyboard>
@@ -423,6 +452,55 @@ export default class Home extends Component {
                 Verifique sua conexão e tente novamente.
               </TextError>
             </ViewError>
+          </Container>
+        </DismissKeyboard>
+      );
+    }
+    if (this.state.loading) {
+      return (
+        <DismissKeyboard>
+          <Container>
+            <StatusBar hidden />
+            <ViewHeader>
+              <LogoTop source={require('../../../assets/Icon.png')} />
+              <RNPickerSelect
+                placeholder={{
+                  label: 'Selecione seu estado',
+                  value: null,
+                }}
+                onValueChange={value => this.getCasosEstado(value)}
+                items={this.state.items}
+                style={{
+                  inputAndroid: {
+                    backgroundColor: 'transparent',
+                    fontSize: 18,
+                    color: 'black',
+                    marginTop: 20,
+                    marginLeft: '25%',
+                    width: 204,
+                    height: 40,
+                    fontFamily: 'VarelaRound-Regular',
+                    lineHeight: 20,
+                    textAlign: 'right',
+                    fontWeight: '700',
+                  },
+                  placeholder: {
+                    color: 'black',
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                  },
+                }}
+                value={this.state.favSport3}
+                useNativeAndroidPickerStyle={false}
+              />
+            </ViewHeader>
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={styles.loadingTxt}>Carregando...</Text>
+            </View>
           </Container>
         </DismissKeyboard>
       );
@@ -527,7 +605,7 @@ export default class Home extends Component {
                     backgroundColor: 'transparent',
                     fontSize: 18,
                     color: 'black',
-                    marginTop: 17,
+                    marginTop: 20,
                     marginLeft: '25%',
                     width: 204,
                     height: 45,
@@ -570,7 +648,11 @@ export default class Home extends Component {
                 }}>
                 <TextViewCase2>Confirmados</TextViewCase2>
                 <ViewText>
-                  <TextNumberCase>{this.state.confirmados}</TextNumberCase>
+                  <TextNumberCase>
+                    {this.state.confirmados
+                      .toFixed(0)
+                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  </TextNumberCase>
                 </ViewText>
               </Card2>
               <Card3
@@ -587,7 +669,11 @@ export default class Home extends Component {
                 }}>
                 <TextViewCase3>Óbitos</TextViewCase3>
                 <ViewText>
-                  <TextNumberCase3>{this.state.mortes}</TextNumberCase3>
+                  <TextNumberCase3>
+                    {this.state.mortes
+                      .toFixed(0)
+                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  </TextNumberCase3>
                 </ViewText>
               </Card3>
             </MainCard>
@@ -602,12 +688,12 @@ export default class Home extends Component {
               <BoxedShare
                 WhatsappMessage="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
                 FacebookShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                FacebookShareMessage={message}
+                FacebookShareMessage={this.state.message}
                 TwitterShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
-                TwitterShareMessage={message}
+                TwitterShareMessage={this.state.message}
                 TwitterViaAccount="ugurr_demirel"
                 NativeShareTitle="React Native Social Share Buttons"
-                NativeShareMessage={message}
+                NativeShareMessage={this.state.message}
                 NativeShareURL="https://github.com/ugurrdemirel/ReactNativeSocialShareButtons"
               />
             </View>
@@ -622,6 +708,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: -30,
+  },
+  loadingTxt: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: screenHeight - 400,
   },
 });

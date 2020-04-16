@@ -93,7 +93,7 @@ export default class Contato extends Component {
               )
             }>
             {' '}
-            v1.2{' '}
+            v2.0{' '}
           </Text>
         </ViewCopyrigth>
       </Container>

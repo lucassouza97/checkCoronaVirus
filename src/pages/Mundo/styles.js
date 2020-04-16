@@ -100,7 +100,7 @@ export const TextValueObitosMundo = styled.Text`
   font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   color: #fab822;
   margin-top: 10px;
   align-items: center;
@@ -110,7 +110,7 @@ export const TextValueCasosMundo = styled.Text`
   font-family: VarelaRound-Regular;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 16px;
   color: #4643d3;
   margin-top: 10px;
   align-items: center;

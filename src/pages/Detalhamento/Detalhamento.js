@@ -19,6 +19,8 @@ import {
   ContributionGraph,
   StackedBarChart,
 } from 'react-native-chart-kit';
+import {ImageError, TextError} from '../Home/styles';
+import NetInfo from '@react-native-community/netinfo';
 import {
   TextNumberConfirmados,
   TextNumberoObitos,
@@ -69,12 +71,18 @@ export default class Detalhamento extends Component {
       sudeste: {cases: 0, datetime: '', deaths: 0},
       sul: {cases: 0, datetime: '', deaths: 0},
       totalB: {cases: 0, deaths: 0},
+      netStatus: 0,
     };
     this.loadStates = this.loadStates.bind(this);
   }
 
   componentDidMount() {
     //this.loadStates();
+    const listener = NetInfo.addEventListener(state => {
+      //console.log(state.isConnected);
+      this.setState({netStatus: Number(state.isConnected)});
+      //this.setInfoNet(this.state.netStatus);
+    });
     this.getCasosReg();
   }
 
@@ -188,6 +196,19 @@ export default class Detalhamento extends Component {
       barPercentage: 0.5,
       borderRadius: 10,
     };
+    if (this.state.netStatus == false) {
+      return (
+        <Container>
+          <View style={[styles.container, styles.error]}>
+            <ImageError source={require('../../../assets/error1.png')} />
+            <TextError>
+              Ocorreu um erro.{'\n'}
+              Verifique sua conexão e tente novamente.
+            </TextError>
+          </View>
+        </Container>
+      );
+    }
     return (
       <Container>
         <ViewHeader>
@@ -205,14 +226,13 @@ export default class Detalhamento extends Component {
             <Text
               style={{
                 color: 'black',
-                fontSize: 16,
-                fontWeight: 'bold',
+                fontSize: 14,
                 marginRight: 10,
               }}>
               Casos:{' '}
               <TextValueCasosMundo>
                 {this.state.totalB.cases
-                  .toFixed(2)
+                  .toFixed(0)
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </TextValueCasosMundo>
             </Text>
@@ -220,14 +240,13 @@ export default class Detalhamento extends Component {
             <Text
               style={{
                 color: 'black',
-                fontSize: 16,
-                fontWeight: 'bold',
+                fontSize: 14,
                 marginLeft: 10,
               }}>
               Óbitos:{' '}
               <TextValueObitosMundo>
                 {this.state.totalB.deaths
-                  .toFixed(2)
+                  .toFixed(0)
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
               </TextValueObitosMundo>
             </Text>
@@ -237,7 +256,6 @@ export default class Detalhamento extends Component {
               style={{
                 color: 'black',
                 fontSize: 12,
-                fontWeight: 'bold',
               }}>
               Taxa de Mortalidade:{' '}
               <TextValueMortalidadeMundo>{result}</TextValueMortalidadeMundo>{' '}
@@ -266,12 +284,18 @@ export default class Detalhamento extends Component {
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumberConfirmados>
-                  {this.state.norte.cases}
+                  {this.state.norte.cases
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumberoObitos>{this.state.norte.deaths}</TextNumberoObitos>
+                <TextNumberoObitos>
+                  {this.state.norte.deaths
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
             <ViewTitleRegiao>
@@ -282,13 +306,17 @@ export default class Detalhamento extends Component {
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumberConfirmados>
-                  {this.state.nordeste.cases}
+                  {this.state.nordeste.cases
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumberoObitos>
-                  {this.state.nordeste.deaths}
+                  {this.state.nordeste.deaths
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -300,13 +328,17 @@ export default class Detalhamento extends Component {
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumberConfirmados>
-                  {this.state.centroOeste.cases}
+                  {this.state.centroOeste.cases
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumberoObitos>
-                  {this.state.centroOeste.deaths}
+                  {this.state.centroOeste.deaths
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -318,13 +350,17 @@ export default class Detalhamento extends Component {
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumberConfirmados>
-                  {this.state.sudeste.cases}
+                  {this.state.sudeste.cases
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
                 <TextNumberoObitos>
-                  {this.state.sudeste.deaths}
+                  {this.state.sudeste.deaths
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -336,12 +372,18 @@ export default class Detalhamento extends Component {
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Confirmados</TextTitleCard>
                 <TextNumberConfirmados>
-                  {this.state.sul.cases}
+                  {this.state.sul.cases
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
                 <TextTitleCard>Óbitos</TextTitleCard>
-                <TextNumberoObitos>{this.state.sul.deaths}</TextNumberoObitos>
+                <TextNumberoObitos>
+                  {this.state.sul.deaths
+                    .toFixed(0)
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
           </MainCard>
@@ -364,5 +406,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
     elevation: 24,
+  },
+  error: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

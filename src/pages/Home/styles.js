@@ -14,7 +14,7 @@ export const ViewHeader = styled.View`
   width: ${DEVICE_WIDTH}px;
   background-color: transparent;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 `;
 export const ViewInfo = styled.View`
   flex: 1;
@@ -62,7 +62,7 @@ export const LogoTop = styled.Image`
   width: 35.41px;
   height: 34.66px;
   left: 20px;
-  top: 24px;
+  top: 25px;
 `;
 
 export const ImageLoading = styled.Image`
@@ -77,7 +77,7 @@ export const SearchIcon = styled.Image`
   position: absolute;
   left: 88.8%;
   right: 5.33%;
-  top: 18%;
+  top: 27px;
 `;
 export const IconCheck = styled.Image`
   width: 35px;
