@@ -299,20 +299,6 @@ export default class Home extends Component {
 
           const taxaM = (Number(json.deaths) / Number(json.cases)) * 100;
           s.taxaM = taxaM.toFixed(2) + '%';
-          
-          const data = format(parseISO(json.datetime), "dd 'de' MMMM'", {
-            locale: pt,
-          });
-
-          s.message = `Corona Virus Report: Neste momento o estado ${
-            json.uf
-          } *(${json.state})* possui *${
-            json.cases
-          }* casos confirmado(s) e *${
-            json.deaths
-          }* óbito(s). ${'\n'}Informações atualizadas em *${
-            data
-          }*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
 
           const data = format(parseISO(json.datetime), "dd 'de' MMMM'", {
             locale: pt,
@@ -368,7 +354,8 @@ export default class Home extends Component {
         s.action = false;
         s.loading = false;
         s.state = json.data.country;
-        s.uf ='https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
+        s.uf =
+          'https://imagepng.org/wp-content/uploads/2017/04/bandeira-do-brasil-6.png';
         const taxaM = Number(json.data.deaths / json.data.cases) * 100;
         s.taxaM = taxaM.toFixed(2) + '%';
         const data = format(parseISO(json.data.updated_at), "dd 'de' MMMM'", {
