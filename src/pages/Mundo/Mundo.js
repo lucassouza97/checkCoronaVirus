@@ -147,7 +147,7 @@ export default class Mundo extends Component {
                 <TextValueCasosMundo>
                   {this.state.totalCasesWorld.confirmed
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextValueCasosMundo>
               </Text>
 
@@ -161,7 +161,7 @@ export default class Mundo extends Component {
                 <TextValueObitosMundo>
                   {this.state.totalCasesWorld.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextValueObitosMundo>
               </Text>
             </View>
@@ -215,7 +215,7 @@ class Country extends Component {
             <TextNumberConfirmados>
               {this.props.data.confirmed
                 .toFixed(0)
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
             </TextNumberConfirmados>
           </ViewCollumn>
           <ViewCollumn style={styles.shadow}>
@@ -223,7 +223,7 @@ class Country extends Component {
             <TextNumberoObitos>
               {this.props.data.deaths
                 .toFixed(0)
-                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
             </TextNumberoObitos>
           </ViewCollumn>
         </ViewDados>

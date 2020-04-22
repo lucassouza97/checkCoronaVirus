@@ -183,14 +183,12 @@ export const TextNumberCase = styled.Text`
   width: auto;
   font-family: VarelaRound-Regular;
   font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
   letter-spacing: 0.25px;
   margin: auto;
   text-align: center;
   letter-spacing: 0.25px;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 22px;
   color: #4643d3;
 `;
 
@@ -316,14 +314,11 @@ export const TextNumberCase3 = styled.Text`
   width: auto;
   font-family: VarelaRound-Regular;
   font-style: normal;
-  font-weight: 600;
-  font-size: 16px;
+  font-size: 24px;
   letter-spacing: 0.25px;
   margin: auto;
   text-align: center;
-  letter-spacing: 0.25px;
   font-weight: bold;
-  font-size: 28px;
   color: #fab822;
 `;
 

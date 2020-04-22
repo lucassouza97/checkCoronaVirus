@@ -233,7 +233,7 @@ export default class Detalhamento extends Component {
               <TextValueCasosMundo>
                 {this.state.totalB.cases
                   .toFixed(0)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
               </TextValueCasosMundo>
             </Text>
 
@@ -247,7 +247,7 @@ export default class Detalhamento extends Component {
               <TextValueObitosMundo>
                 {this.state.totalB.deaths
                   .toFixed(0)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
               </TextValueObitosMundo>
             </Text>
           </View>
@@ -286,7 +286,7 @@ export default class Detalhamento extends Component {
                 <TextNumberConfirmados>
                   {this.state.norte.cases
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
@@ -294,7 +294,7 @@ export default class Detalhamento extends Component {
                 <TextNumberoObitos>
                   {this.state.norte.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -308,7 +308,7 @@ export default class Detalhamento extends Component {
                 <TextNumberConfirmados>
                   {this.state.nordeste.cases
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
@@ -316,7 +316,7 @@ export default class Detalhamento extends Component {
                 <TextNumberoObitos>
                   {this.state.nordeste.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -330,7 +330,7 @@ export default class Detalhamento extends Component {
                 <TextNumberConfirmados>
                   {this.state.centroOeste.cases
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
@@ -338,7 +338,7 @@ export default class Detalhamento extends Component {
                 <TextNumberoObitos>
                   {this.state.centroOeste.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -352,7 +352,7 @@ export default class Detalhamento extends Component {
                 <TextNumberConfirmados>
                   {this.state.sudeste.cases
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
@@ -360,7 +360,7 @@ export default class Detalhamento extends Component {
                 <TextNumberoObitos>
                   {this.state.sudeste.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>
@@ -374,7 +374,7 @@ export default class Detalhamento extends Component {
                 <TextNumberConfirmados>
                   {this.state.sul.cases
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberConfirmados>
               </ViewCollumn>
               <ViewCollumn style={styles.shadow}>
@@ -382,7 +382,7 @@ export default class Detalhamento extends Component {
                 <TextNumberoObitos>
                   {this.state.sul.deaths
                     .toFixed(0)
-                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                 </TextNumberoObitos>
               </ViewCollumn>
             </ViewDados>

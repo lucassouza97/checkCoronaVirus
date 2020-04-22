@@ -310,12 +310,12 @@ export default class Home extends Component {
             .toFixed(0)
             .replace(
               /(\d)(?=(\d{3})+(?!\d))/g,
-              '$1,',
+              '$1.',
             )}* casos confirmado(s) e *${json.deaths
             .toFixed(0)
             .replace(
               /(\d)(?=(\d{3})+(?!\d))/g,
-              '$1,',
+              '$1.',
             )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
 
           this.setState(s);
@@ -366,12 +366,12 @@ export default class Home extends Component {
           .toFixed(0)
           .replace(
             /(\d)(?=(\d{3})+(?!\d))/g,
-            '$1,',
+            '$1.',
           )}* casos confirmado(s) e *${json.data.deaths
           .toFixed(0)
           .replace(
             /(\d)(?=(\d{3})+(?!\d))/g,
-            '$1,',
+            '$1.',
           )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraíos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
 
         this.setState(s);
@@ -651,7 +651,7 @@ export default class Home extends Component {
                   <TextNumberCase>
                     {this.state.confirmados
                       .toFixed(0)
-                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                   </TextNumberCase>
                 </ViewText>
               </Card2>
@@ -672,7 +672,8 @@ export default class Home extends Component {
                   <TextNumberCase3>
                     {this.state.mortes
                       .toFixed(0)
-                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}
+                      .replace('.', ',') // replace decimal , character with point
+                      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')}
                   </TextNumberCase3>
                 </ViewText>
               </Card3>

@@ -138,6 +138,8 @@ export const TextHeader = styled.Text`
   font-size: 18px;
   line-height: 20px;
   color: #000;
+  text-align: center;
+  margin: 2px;
 `;
 export const TextTitleCard = styled.Text`
   font-family: VarelaRound-Regular;
