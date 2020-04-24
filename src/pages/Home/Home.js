@@ -372,7 +372,7 @@ export default class Home extends Component {
           .replace(
             /(\d)(?=(\d{3})+(?!\d))/g,
             '$1.',
-          )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraíos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
+          )}* óbito(s). ${'\n'}Informações atualizadas em *${data}*.${'\n'}Dados extraídos do aplicativo _Check Corona Virus_. ${'\n'}Faça o download do app no link: bit.ly/ch3ckcoronav `;
 
         this.setState(s);
       })
