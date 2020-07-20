@@ -21,7 +21,7 @@
     "@react-navigation/stack": "^5.2.6",
     "date-fns": "^2.11.0",
     "jsc-android": "^241213.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "16.9.0",
     "react-backdrop-filter": "^2.1.0",
     "react-intl-number-format": "^1.1.1",
